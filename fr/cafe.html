@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>✨ Lecture divinatoire de la tasse de café ☕🔮</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  <style>
+   .meteor {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.6);
+    animation: fall 5s linear forwards;
+    z-index: 0;
+  }
+
+  .meteor::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
+    transform: rotate(0deg);
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(120vh);
+      opacity: 0;
+    }
+  }
+    body {
+      font-family: 'Cinzel Decorative', cursive;
+      background: url('https://i.imgur.com/4DeeAZO.jpeg') no-repeat center center fixed;
+      background-attachment: fixed;
+      color: #f0eade;
+      padding: 20px;
+      margin: 0;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fcd34d;
+      text-shadow: 2px 2px 6px #000;
+      margin-bottom: 25px;
+      font-size: 2.2em;
+    }
+
+    form {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 0 25px rgba(252, 211, 77, 0.3), 0 0 10px rgba(255, 255, 255, 0.05);
+      max-width: 700px;
+      margin: auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1em;
+      color: #fef9c3;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #fcd34d;
+      background-color: rgba(31, 41, 55, 0.9);
+      color: #fef9c3;
+      border-radius: 10px;
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 25px;
+      background: linear-gradient(145deg, #fcd34d, #fde68a);
+      color: #000;
+      padding: 14px 24px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 1.1em;
+      box-shadow: 0 0 20px #fcd34d, 0 0 5px #fff;
+      transition: all 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #fff8dc;
+      transform: scale(1.03);
+      box-shadow: 0 0 25px #fff3b0, 0 0 10px #fcd34d;
+    }
+
+    
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .navbar a {
+      font-family: 'Great Vibes', cursive;
+      color: #fcd34d;
+      margin: 0 20px;
+      font-size: 1.4em;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff7bbe;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover {
+      color: #ff7bbe;
+      text-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 2.2em;
+      }
+
+      .navbar a {
+        font-size: 1.2em;
+        margin: 0 10px;
+      }
+
+      body {
+        padding: 100px 10px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="servisos.html">retour</a>
+  </nav>
+  </style>
+  </head>
+  <body>
+    <header>
+      <nav style="text-align:center; margin-bottom:20px;">
+        <a href="servisos.html" style="color:#fcd34d; margin: 0 15px; font-weight:bold; text-decoration:none;">retour</a>
+      </nav>
+    </header>
+  
+    <h1>Lecture Mystique de la Tasse de Café ☕🔮</h1>
+  
+    <form id="cafeForm">
+      <label for="name">Quel est votre nom ?</label>
+      <input type="text" id="name" name="name" required />
+  
+      <label for="birth_date">Date de naissance :</label>
+      <input type="date" id="birth_date" name="birth_date" required />
+  
+      <label for="birth_place">Lieu de naissance :</label>
+      <input type="text" id="birth_place" name="birth_place" required />
+  
+      <label for="birth_time">Heure de naissance (si connue) :</label>
+      <input type="time" id="birth_time" name="birth_time" />
+  
+      <label for="occupation">Profession (optionnel) :</label>
+      <input type="text" id="occupation" name="occupation" />
+  
+      <label for="emotion">Comment vous sentez-vous en ce moment ?</label>
+      <select id="emotion" name="emotion" required>
+        <option value="">Sélectionnez...</option>
+        <option value="Calme">Calme</option>
+        <option value="Anxieux">Anxieux</option>
+        <option value="Plein d'espoir">Plein d'espoir</option>
+        <option value="Confus">Confus</option>
+        <option value="Curieux">Curieux</option>
+      </select>
+  
+      <label for="question">Quelle est votre question ou préoccupation pour cette lecture ?</label>
+      <textarea id="question" name="question" rows="4" placeholder="Décrivez brièvement..." required></textarea>
+  
+      <label for="life_area">Sur quel aspect de votre vie souhaitez-vous que la lecture se concentre ?</label>
+      <select id="life_area" name="life_area" required>
+        <option value="">Sélectionnez...</option>
+        <option value="Amour">Amour</option>
+        <option value="Carrière">Carrière</option>
+        <option value="Santé">Santé</option>
+        <option value="Spiritualité">Spiritualité</option>
+      </select>
+  
+      <label for="open_advice">Êtes-vous ouvert(e) à recevoir des conseils inattendus ?</label>
+      <select id="open_advice" name="open_advice" required>
+        <option value="">Sélectionnez...</option>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+      </select>
+  
+      <label for="email">Veuillez saisir votre e-mail pour recevoir la lecture :</label>
+      <input type="email" id="email" name="email" required />
+  
+      <button type="submit">Envoyer et recevoir la lecture</button>
+    </form>
+  
+    <script>
+      function generateUniqueId() {
+        return 'id-' + Math.random().toString(36).substr(2, 9);
+      }
+  
+      document.getElementById('cafeForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+  
+        const submission_id = generateUniqueId();
+        const formData = {
+          submission_id,
+          name: document.getElementById('name').value,
+          emotion: document.getElementById('emotion').value,
+          question: document.getElementById('question').value,
+          life_area: document.getElementById('life_area').value,
+          open_advice: document.getElementById('open_advice').value,
+          email: document.getElementById('email').value,
+          birth_date: document.getElementById('birth_date').value,
+          birth_place: document.getElementById('birth_place').value,
+          birth_time: document.getElementById('birth_time').value,
+          occupation: document.getElementById('occupation').value,
+        };
+  
+        const paymentTab = window.open('', '_blank');
+  
+        try {
+          const response = await fetch("https://hook.eu2.make.com/yxok5h309oos867twxza3v79ouh5gwtn", {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: { "Content-Type": "application/json" }
+          });
+  
+          const data = await response.json();
+  
+          if (data.payment_url) {
+            paymentTab.location.href = data.payment_url;
+          } else {
+            paymentTab.close();
+            alert("Erreur lors du démarrage du paiement. Veuillez réessayer.");
+          }
+        } catch (error) {
+          paymentTab.close();
+          alert("Erreur de communication avec le serveur.");
+          console.error(error);
+        }
+      });
+    </script>
+  
+    <script>
+      function createMeteor() {
+        const meteor = document.createElement('div');
+        meteor.classList.add('meteor');
+  
+        meteor.style.left = Math.random() * window.innerWidth + 'px';
+        meteor.style.top = Math.random() * -200 + 'px';
+        meteor.style.animationDuration = (Math.random() * 3 + 4) + 's';
+  
+        document.body.appendChild(meteor);
+  
+        setTimeout(() => {
+          meteor.remove();
+        }, 6000);
+      }
+  
+      setInterval(createMeteor, 400);
+    </script>
+  </body>
+  </html>
+  

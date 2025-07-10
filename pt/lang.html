@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>انتخاب زبان</title>
+<style>
+  body { font-family: sans-serif; text-align: center; padding-top: 50px; }
+  button { font-size: 20px; margin: 10px; padding: 10px 20px; }
+</style>
+</head>
+<body>
+  <h2>لطفاً زبان خود را انتخاب کنید</h2>
+  <button onclick="goToLang('fa')">فارسی</button>
+  <button onclick="goToLang('en')">English</button>
+  <button onclick="goToLang('pt')">Português</button>
+  <button onclick="goToLang('ar')">العربية</button>
+  <script>
+    function goToLang(lang){
+      window.location.href = `/${lang}/index.html`;
+    }
+  </script>
+</body>
+</html>

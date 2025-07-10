@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>✨ نماد جادویی ثروت ✨</title>
+  <style>
+    :root {
+      --background-image: url('https://i.imgur.com/xnaZka8.jpeg');
+    }
+
+    * {
+      box-sizing: border-box;
+      direction: rtl;
+    }
+
+    body {
+      margin: 0;
+      padding: 0 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background-image) no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #f0f0f0;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 0;
+    }
+
+    form {
+      position: relative;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 100%;
+      max-width: 600px;
+      z-index: 1;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fcd34d;
+      position: relative;
+      font-family: 'Tahoma', sans-serif;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    nav {
+      text-align: center;
+      padding: 20px 0 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    nav a {
+      color: #fcd34d;
+      margin: 0 15px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #fffbe6;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      text-align: right;
+    }
+
+    button {
+      margin-top: 20px;
+      background-color: #8b4513;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #a0522d;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .navbar a {
+      font-family: 'Tahoma', cursive;
+      color: #fcd34d;
+      margin: 0 20px;
+      font-size: 1.4em;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #edff7b;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px #fbff7b;
+    }
+
+    .navbar a:hover {
+      color: #ffe27b;
+      text-shadow: 0 0 10px #fff07b;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 520px) {
+      body {
+        padding: 100px 10px 40px;
+      }
+      .navbar a {
+        font-size: 1.2em;
+        margin: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar">
+    <a href="index.html">بازگشت</a>
+  </nav>
+
+  <h1>✨ خلق نماد جادویی ثروت ✨</h1>
+
+  <form id="form">
+    <label>نام کامل:</label>
+    <input type="text" name="nome" required>
+
+    <label>تاریخ تولد:</label>
+    <input type="date" name="data_nascimento" required>
+
+    <label>ساعت تولد (در صورت اطلاع):</label>
+    <input type="text" name="hora_nascimento">
+
+    <label>شهر و کشور محل تولد:</label>
+    <input type="text" name="local_nascimento">
+
+    <label>جنسیت:</label>
+    <select name="genero">
+      <option value="زن">زن</option>
+      <option value="مرد">مرد</option>
+      <option value="دیگر">دیگر</option>
+    </select>
+
+    <label>شغل یا مسیر حرفه‌ای کنونی شما:</label>
+    <input type="text" name="profissao">
+
+    <label>احساس شما در روزهای اخیر چگونه بوده است؟</label>
+    <textarea name="sentimentos"></textarea>
+
+    <label>بزرگترین آرزوی مالی شما در حال حاضر چیست؟</label>
+    <textarea name="desejo_financeiro"></textarea>
+
+    <label>چه چیزی را مانع جریان ثروت در زندگی خود می‌دانید؟</label>
+    <textarea name="bloqueio"></textarea>
+
+    <label>چه نوع انرژی یا برکتی را دوست دارید وارد زندگی‌تان شود؟</label>
+    <textarea name="energia_desejada"></textarea>
+
+    <label>📧 ایمیل شما برای دریافت نماد جادویی ثروت:</label>
+    <input type="email" name="email" required>
+
+    <button type="submit">🔓 فعال‌سازی انرژی فراوانی من 💰</button>
+  </form>
+
+  <script>
+    document.getElementById("form").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const formData = {};
+
+      [...form.elements].forEach(el => {
+        if (el.name) formData[el.name] = el.value;
+      });
+
+      const paymentTab = window.open('', '_blank');
+
+      try {
+        const response = await fetch("https://hook.eu2.make.com/v4qy43jd0z6igcu4ankq445b5lp7opmd", {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) throw new Error("خطا در ارسال درخواست");
+
+        const data = await response.json();
+
+        if (data.payment_url) {
+          paymentTab.location.href = data.payment_url;
+        } else if (data.message) {
+          paymentTab.document.write("<pre>${data.message}</pre>");
+          paymentTab.document.title = "نتیجه نماد جادویی";
+        } else {
+          paymentTab.document.write("<pre>پاسخ دریافت شد، اما فرمت ناشناخته بود.</pre>");
+          paymentTab.document.title = "نتیجه نماد جادویی";
+        }
+      } catch (error) {
+        paymentTab.close();
+        alert("خطا در ارسال فرم: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>

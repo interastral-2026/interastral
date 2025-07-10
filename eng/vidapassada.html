@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Who were you in a past life?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: url('https://i.imgur.com/QTs9wVR.jpeg') no-repeat center center fixed; 
+                  
+      background-size: cover;
+      font-family: 'Vazirmatn', sans-serif;
+      color: #f5dcff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 40px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 30px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow: 0 0 25px rgba(200, 100, 255, 0.4);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #ffb4f4;
+    }
+    label {
+      margin-top: 10px;
+      display: block;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: none;
+      font-size: 15px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      margin-bottom: 16px;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #f0c0e8;
+      font-style: italic;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #e84cc2;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff79d2;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .navbar a {
+      font-family: 'Great Vibes', cursive;
+      color: #fcd34d;
+      margin: 0 20px;
+      font-size: 1.4em;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff7bbe;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover {
+      color: #ff7bbe;
+      text-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 2.2em;
+      }
+
+      .navbar a {
+        font-size: 1.2em;
+        margin: 0 10px;
+      }
+
+      body {
+        padding: 100px 10px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="services.html">back</a>
+  </nav>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Inter Astral ✨</h2>
+      <form id="pastLifeForm">
+  
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" placeholder="E.g., Sara Silva" required>
+  
+        <label for="birthDate">Date of birth</label>
+        <input type="date" id="birthDate" name="birthDate" required>
+  
+        <label for="birthPlace">Place of birth</label>
+        <input type="text" id="birthPlace" name="birthPlace" placeholder="E.g., Rio de Janeiro" required>
+  
+        <label for="currentLocation">Current place of residence</label>
+        <input type="text" id="currentLocation" name="currentLocation" placeholder="E.g., São Paulo" required>
+  
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender" required>
+          <option value="">Select</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="other">Other</option>
+        </select>
+  
+        <label for="emotion">Predominant emotion in your current life</label>
+        <input type="text" id="emotion" name="emotion" placeholder="E.g., Hope" required>
+  
+        <label for="dream">A recurring dream or nightmare</label>
+        <textarea id="dream" name="dream" rows="3" placeholder="Describe a dream you often remember" required></textarea>
+  
+        <label for="symbol">A symbol that represents you</label>
+        <input type="text" id="symbol" name="symbol" placeholder="E.g., Moon, star, bird" required>
+  
+        <label for="photo">Upload a selfie (optional)</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+  
+        <label for="email">Your email to receive your Inter Astral secret ✨</label>
+        <input type="email" id="email" name="email" placeholder="example@magic.com" required>
+  
+        <button type="submit">Discover my past life 🔮</button>
+      </form>
+    </div>
+  
+    <script>
+      document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+  
+        const photoFile = formData.get("photo");
+        let photoUrl = "";
+  
+        if (photoFile && photoFile.size > 0) {
+          try {
+            // Convert image file to Base64 string
+            const imageBase64 = await new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                const result = reader.result;
+                if (typeof result === 'string') {
+                  const base64Match = result.match(/^data:image\/\w+;base64,(.*)$/);
+                  if (base64Match && base64Match[1]) {
+                    resolve(base64Match[1]);
+                  } else {
+                    reject(new Error("Invalid Base64 format."));
+                  }
+                } else {
+                  reject(new Error("Invalid FileReader result."));
+                }
+              };
+              reader.onerror = () => reject(new Error("Error reading image file."));
+              reader.readAsDataURL(photoFile);
+            });
+  
+            // Upload image to Imgur
+            const res = await fetch("https://api.imgur.com/3/image", {
+              method: "POST",
+              headers: {
+                Authorization: "Client-ID 787264741ebc993",
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify({ image: imageBase64 })
+            });
+  
+            const data = await res.json();
+            if (!data.success) throw new Error(data.data?.error || "Unknown failure");
+            photoUrl = data.data.link;
+  
+          } catch (err) {
+            alert("Error uploading image: " + err.message);
+            return;
+          }
+        }
+  
+        // Convert form data entries to plain object
+        const plainForm = Object.fromEntries(formData.entries());
+        plainForm.photoUrl = photoUrl;
+  
+        try {
+          // Send form data to Make.com webhook
+          const response = await fetch("https://hook.eu2.make.com/w3u6lgqfb5pyii8hqtae6f7h2wt0gt6w", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(plainForm)
+          });
+  
+          if (!response.ok) {
+            alert("Error sending data. Please try again.");
+            return;
+          }
+  
+          const result = await response.json();
+  
+          if (result.paymentUrl) {
+            window.location.href = result.paymentUrl;
+          } else {
+            alert("Data sent, but no payment link was returned.");
+          }
+  
+        } catch (error) {
+          alert("Connection error. Please check your internet.");
+        }
+      });
+    </script>
+  </body>
+  </html>
+  

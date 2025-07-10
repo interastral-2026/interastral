@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>اوراکل روز</title>
+  <style>
+    :root {
+      --background-image: url('https://i.imgur.com/G7xfUON.png');
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background-image) no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #f0f0f0;
+      position: relative;
+      direction: rtl;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 0;
+    }
+
+    nav {
+      text-align: center;
+      padding: 20px 0 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    nav a {
+      color: #fcd34d;
+      margin: 0 15px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #fffbe6;
+    }
+
+    form {
+      position: relative;
+      background: rgba(117, 114, 114, 0.085);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 100%;
+      max-width: 600px;
+      z-index: 1;
+      margin-top: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: #ffffff;
+      background: linear-gradient(45deg, #fff, #c79aff, #86f0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+      color: #e0e0e0;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      margin-top: 8px;
+      padding: 12px;
+      border-radius: 12px;
+      border: none;
+      font-size: 1rem;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+      transition: background-color 0.3s ease;
+      direction: rtl;
+      text-align: right;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      background: rgba(255, 255, 255, 0.35);
+      direction: rtl;
+      text-align: right;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg, #8e2de2, #4a00e0);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-weight: 700;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px #7b2ff7;
+      transition: background 0.4s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #4a00e0, #8e2de2);
+    }
+
+    @media (max-width: 480px) {
+      body {
+        align-items: center;
+      }
+
+      form {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .navbar a {
+      font-family: 'Great Vibes', cursive;
+      color: #fcd34d;
+      margin: 0 20px;
+      font-size: 1.4em;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff7bbe;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover {
+      color: #ff7bbe;
+      text-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html">بازگشت</a>
+  </nav>
+
+  <form id="reflectionForm">
+    <h1>اوراکل روز</h1>
+
+    <!-- سوالات با زبان شاعرانه و جادویی -->
+
+    <label for="first_name">نام واقعی‌تان چیست؟ همان نامی که با روح شما هم‌نواست.</label>
+    <input type="text" id="first_name" name="first_name" required />
+
+    <label for="birth_date">در کدام روز مقدس پا به این جهان گذاشتید؟</label>
+    <input type="date" id="birth_date" name="birth_date" required />
+
+    <label for="birth_time">آیا زمان تقریبی تولدتان را به خاطر دارید؟ (در صورت تمایل)</label>
+    <input type="time" id="birth_time" name="birth_time" />
+
+    <label for="birth_place">زادگاه‌تان کدام شهر یا روستاست؟</label>
+    <input type="text" id="birth_place" name="birth_place" required />
+
+    <label for="gender">در این بُعد خاکی، خود را چگونه می‌بینید؟</label>
+    <select id="gender" name="gender" required>
+      <option value="">یک انرژی را برگزینید...</option>
+      <option value="Feminino">مونث</option>
+      <option value="Masculino">مذکر</option>
+      <option value="Outro">دیگر / ترجیح می‌دهم نگویم</option>
+    </select>
+
+    <label for="occupation">شغل یا مسیر شما در این دنیای مادی چیست؟</label>
+    <input type="text" id="occupation" name="occupation" />
+
+    <label for="worry_today">امروز چه دغدغه‌ای قلبتان را درگیر کرده است؟</label>
+    <input type="text" id="worry_today" name="worry_today" required />
+
+    <label for="emotion">کدام احساس اکنون در وجودتان می‌تپد؟</label>
+    <select id="emotion" name="emotion" required>
+      <option value="">ارتعاش خود را انتخاب کنید...</option>
+      <option value="Gratidão">شکرگزاری</option>
+      <option value="Ansiedade">اضطراب</option>
+      <option value="Esperança">امید</option>
+      <option value="Tristeza">اندوه</option>
+      <option value="Confusão">سرگشتگی</option>
+    </select>
+
+    <label for="desire_today">امروز چه چیزی را می‌خواهید در زندگی‌تان متجلی کنید؟</label>
+    <textarea id="desire_today" name="desire_today" rows="2"></textarea>
+
+    <label for="important_thought">آیا اندیشه یا نگرانی عمیقی هست که می‌خواهید با منبع هستی در میان بگذارید؟</label>
+    <textarea id="important_thought" name="important_thought" rows="2"></textarea>
+
+    <label for="email">جهان، پاسخ شما را به کدام آدرس بفرستد؟</label>
+    <input type="email" id="email" name="email" required />
+
+    <button type="submit">🔮 دریافت پیام جادویی من</button>
+  </form>
+
+  <script>
+    function generateUniqueId() {
+      return 'id-' + Math.random().toString(36).substr(2, 9);
+    }
+
+    document.getElementById('reflectionForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const submission_id = generateUniqueId();
+      const formData = {
+        submission_id,
+        first_name: document.getElementById('first_name').value,
+        birth_date: document.getElementById('birth_date').value,
+        birth_time: document.getElementById('birth_time').value,
+        birth_place: document.getElementById('birth_place').value,
+        gender: document.getElementById('gender').value,
+        occupation: document.getElementById('occupation').value,
+        worry_today: document.getElementById('worry_today').value,
+        emotion: document.getElementById('emotion').value,
+        desire_today: document.getElementById('desire_today').value,
+        important_thought: document.getElementById('important_thought').value,
+        email: document.getElementById('email').value
+      };
+
+      const paymentTab = window.open('', '_blank');
+
+      try {
+        const response = await fetch("https://hook.eu2.make.com/xnyduenkbow9rblf93ng63iwmnxtyv41", {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: { "Content-Type": "application/json" }
+        });
+
+        const data = await response.json();
+
+        if (data.payment_url) {
+          paymentTab.location.href = data.payment_url;
+        } else {
+          paymentTab.close();
+          alert("خطا در شروع پرداخت. لطفاً دوباره تلاش کنید.");
+        }
+      } catch (error) {
+        paymentTab.close();
+        alert("مشکلی در ارتباط با سرور رخ داد.");
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>

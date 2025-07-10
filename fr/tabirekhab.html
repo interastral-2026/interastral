@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>🔮 Interprétation des rêves🔮 </title>
+  <style>
+     body {
+      font-family: 'Cinzel Decorative', cursive;
+      background: url('https://i.imgur.com/8THjUzP.jpeg') no-repeat center center fixed;
+      background-attachment: fixed;
+      color: #f0eade;
+      padding: 20px;
+      margin: 0;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fcd34d;
+      text-shadow: 2px 2px 6px #000;
+      margin-bottom: 25px;
+      font-size: 2.2em;
+    }
+
+    form {
+      background: rgba(124, 123, 123, 0.7);
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 0 25px rgba(252, 211, 77, 0.3), 0 0 10px rgba(255, 255, 255, 0.05);
+      max-width: 700px;
+      margin: auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1em;
+      color: #fef9c3;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #fcd34d;
+      background-color: rgba(31, 41, 55, 0.9);
+      color: #fef9c3;
+      border-radius: 10px;
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 1em;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 25px;
+      background: linear-gradient(145deg, #fcd34d, #fde68a);
+      color: #000;
+      padding: 14px 24px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 1.1em;
+      box-shadow: 0 0 20px #fcd34d, 0 0 5px #fff;
+      transition: all 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #fff8dc;
+      transform: scale(1.03);
+      box-shadow: 0 0 25px #fff3b0, 0 0 10px #fcd34d;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .navbar a {
+      font-family: 'Great Vibes', cursive;
+      color: #fcd34d;
+      margin: 0 20px;
+      font-size: 1.4em;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff7bbe;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover {
+      color: #ff7bbe;
+      text-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 2.2em;
+      }
+
+      .navbar a {
+        font-size: 1.2em;
+        margin: 0 10px;
+      }
+
+      body {
+        padding: 100px 10px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="servisos.html">retour</a>
+  </nav>
+  
+  </style>
+  </head>
+  <body>
+    <header>
+      <nav style="text-align:center; margin-bottom:20px;">
+        <a href="servisos.html" style="color:#fcd34d; margin: 0 15px; font-weight:bold; text-decoration:none;">retour</a>
+      </nav>
+    </header>
+  
+    <h1>🌙 Interprétation magique de votre rêve</h1>
+  
+    <form id="dreamForm">
+      <label>Quel est votre prénom de naissance ?</label>
+      <input type="text" name="name" required>
+  
+      <label>Votre date de naissance :</label>
+      <input type="date" name="birth_date" required>
+  
+      <label>Quand avez-vous fait ce rêve ?</label>
+      <input type="date" name="dream_date" required>
+  
+      <label>Comment vous sentiez-vous à ce moment-là dans votre vie ?</label>
+      <textarea name="emotion_at_the_time" required></textarea>
+  
+      <label>Racontez-nous votre rêve avec tous les détails dont vous vous souvenez :</label>
+      <textarea name="dream_description" required></textarea>
+  
+      <label>Ce rêve s'est-il répété ?</label>
+      <select name="is_repeating" required>
+        <option value="Oui">Oui</option>
+        <option value="Non">Non</option>
+        <option value="Pas sûr">Pas sûr</option>
+      </select>
+  
+      <label>Quel style d'interprétation préférez-vous ?</label>
+      <select name="interpretation_style" required>
+        <option value="Mystique et symbolique">Mystique et symbolique</option>
+        <option value="Direct et objectif">Direct et objectif</option>
+        <option value="Inspiré par la tradition orientale">Inspiré par la tradition orientale</option>
+      </select>
+  
+      <label>Genre :</label>
+      <select name="gender" required>
+        <option value="Femme">Femme</option>
+        <option value="Homme">Homme</option>
+        <option value="Autre">Autre</option>
+      </select>
+  
+      <label>Où habitez-vous actuellement (ville et pays) :</label>
+      <input type="text" name="location" required>
+  
+      <label>Votre email pour recevoir l'interprétation :</label>
+      <input type="email" name="email" required>
+  
+      <button type="submit">Recevoir l'interprétation 🌙</button>
+    </form>
+  
+    <script>
+      document.getElementById("dreamForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+        const formData = {};
+        const inputs = this.querySelectorAll("input, select, textarea");
+        inputs.forEach(input => {
+          formData[input.name] = input.value;
+        });
+  
+        const paymentTab = window.open('', '_blank');
+  
+        try {
+          const response = await fetch("https://hook.eu2.make.com/aphabacben826fjotcx4xy2tu81tep1e", {
+            method: "POST",
+            body: JSON.stringify(formData),
+            headers: { "Content-Type": "application/json" }
+          });
+  
+          const data = await response.json();
+  
+          if (data.payment_url) {
+            paymentTab.location.href = data.payment_url;
+          } else {
+            paymentTab.close();
+            alert("Erreur lors du démarrage du paiement.");
+          }
+        } catch (error) {
+          paymentTab.close();
+          alert("Erreur de communication avec le serveur.");
+          console.error(error);
+        }
+      });
+    </script>
+  </body>
+  </html>
+  

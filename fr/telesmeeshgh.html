@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lost Love’s Grace</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(135deg, #2c003e, #6a0572);
+      font-family: 'Montserrat', sans-serif;
+      color: #f0e6f6;
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(44, 0, 62, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+      max-width: 480px;
+      width: 100%;
+      padding: 30px 40px;
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8em;
+      color: #f82b91;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px #f5afd2;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #f8c6de;
+      text-shadow: 0 0 5px #ff7bbe;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      border: 1px solid #ba75a1;
+      background: rgba(255, 255, 255, 0.1);
+      color: #f0e6f6;
+      font-size: 1em;
+      transition: background 0.3s ease, border-color 0.3s ease;
+      box-shadow: inset 0 0 10px rgba(255, 105, 180, 0.3);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #dda0ddaa;
+      font-style: italic;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: #ff7bbe;
+      outline: none;
+      box-shadow: 0 0 12px #ff7bbe;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px 0;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #ff56a0, #ff7bbe);
+      color: rgb(225, 33, 203);
+      font-size: 1.2em;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 8px #ff56a0bb;
+      font-family: 'Great Vibes', cursive;
+      text-shadow: 0 0 6px #fff;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #ff7bbe, #ff56a0);
+      box-shadow: 0 5px 15px #ff7bbebb;
+    }
+
+    textarea::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    textarea::-webkit-scrollbar-thumb {
+      background: #ff7bbeaa;
+      border-radius: 10px;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .navbar a {
+      font-family: 'Great Vibes', cursive;
+      color: #fcd34d;
+      margin: 0 20px;
+      font-size: 1.4em;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff7bbe;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover {
+      color: #ff7bbe;
+      text-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 2.2em;
+      }
+
+      .navbar a {
+        font-size: 1.2em;
+        margin: 0 10px;
+      }
+
+      body {
+        padding: 100px 10px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  Voici ta version en français, tout en gardant la structure HTML intacte :
+
+```html
+<nav class="navbar">
+  <a href="servisos.html">retour</a>
+</nav>
+
+<div class="container">
+  <form id="lostLoveForm">
+    <h2>🔮 Chemin vers la Reconquête Amoureuse</h2>
+
+    <label>Votre nom complet :</label>
+    <input type="text" name="user_name" required>
+
+    <label>Votre date de naissance :</label>
+    <input type="date" name="user_birthdate" required>
+
+    <label>Heure de naissance (si connue) :</label>
+    <input type="text" name="user_birthtime" placeholder="Ex : 14:30">
+
+    <label>Ville et pays de naissance :</label>
+    <input type="text" name="user_birthplace">
+
+    <label>Nom de votre bien-aimé(e) :</label>
+    <input type="text" name="love_name" required>
+
+    <label>Date de naissance de votre bien-aimé(e) :</label>
+    <input type="date" name="love_birthdate" required>
+
+    <label>Depuis combien de temps êtes-vous séparés ?</label>
+    <input type="text" name="time_apart">
+
+    <label>Raison de la séparation (si connue) :</label>
+    <input type="text" name="reason">
+
+    <label>Que souhaitez-vous le plus concernant cette personne ?</label>
+    <textarea name="love_desire"></textarea>
+
+    <label>Comment vous sentez-vous en ce moment ?</label>
+    <input type="text" name="emotion">
+
+    <label>Votre genre :</label>
+    <select name="gender">
+      <option value="female">Femme</option>
+      <option value="male">Homme</option>
+      <option value="other">Autre</option>
+    </select>
+
+    <label>Genre de votre bien-aimé(e) :</label>
+    <select name="are">
+      <option value="female">Femme</option>
+      <option value="male">Homme</option>
+      <option value="other">Autre</option>
+    </select>
+
+    <label>Nom de votre mère (optionnel) :</label>
+    <input type="text" name="mother_name">
+
+    <label>📧 Votre email pour recevoir le message :</label>
+    <input type="email" name="email" required>
+
+    <button type="submit">Recevoir la Révélation du Cœur 💖</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("lostLoveForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const formData = {};
+    const inputs = this.querySelectorAll("input, textarea, select");
+    inputs.forEach(input => {
+      formData[input.name] = input.value;
+    });
+
+    const paymentTab = window.open('', '_blank');
+
+    try {
+      const response = await fetch("https://hook.eu2.make.com/mwpckrec5ono391ltlrdt80ga2i51dl6", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" }
+      });
+
+      const data = await response.json();
+
+      if (data.payment_url) {
+        paymentTab.location.href = data.payment_url;
+      } else {
+        paymentTab.close();
+        alert("Erreur lors du lancement du paiement. Veuillez réessayer.");
+      }
+    } catch (error) {
+      paymentTab.close();
+      alert("Erreur de communication avec le serveur.");
+      console.error(error);
+    }
+  });
+</script>
+</body>
+</html>

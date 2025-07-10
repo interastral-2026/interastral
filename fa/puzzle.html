@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بازی پازل کهکشانی با مراحل</title>
+<style>
+  /* پس زمینه کهکشانی با انیمیشن ستاره ها */
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(ellipse at center, #000010, #000000);
+    overflow: hidden;
+    font-family: 'Marcellus', serif;
+    color: #c9b8ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+  }
+
+  /* ستاره های ریز */
+  .stars {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    background: transparent;
+    z-index: 0;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation-name: twinkle;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  @keyframes twinkle {
+    0% {opacity: 0.3;}
+    100% {opacity: 1;}
+  }
+
+  h1 {
+    margin: 20px 0 10px;
+    text-shadow: 0 0 10px #9c7fff;
+  }
+
+  #puzzle {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 3px;
+    background: #111022;
+    border-radius: 15px;
+    box-shadow: 0 0 30px #8a7fff;
+    z-index: 1;
+  }
+
+  .piece {
+    border-radius: 8px;
+    box-shadow: 0 0 8px #a89fff;
+    cursor: pointer;
+    background-size: 400px 400px;
+    transition: box-shadow 0.3s ease;
+  }
+  .piece:hover {
+    box-shadow: 0 0 20px #d0c0ff;
+  }
+  .empty {
+    background: transparent;
+    cursor: default;
+    box-shadow: none;
+  }
+
+  #message {
+    margin-top: 20px;
+    font-size: 20px;
+    min-height: 30px;
+    text-align: center;
+    color: #d9cfff;
+    text-shadow: 0 0 8px #bb99ff;
+    font-weight: bold;
+  }
+
+  #score {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #bbaaff;
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 10px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    background: #8c7fff;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 0 15px #b3aaff;
+    transition: background 0.3s ease;
+    z-index: 2;
+  }
+  button:hover {
+    background: #bbaaff;
+  }
+  @media (max-width: 480px) {
+    #puzzle {
+      width: 90vw;
+      height: 90vw;
+      background-size: 120% 120%;
+    }
+    h1 { font-size: 22px; }
+    #message, #score { font-size: 16px; }
+    button { font-size: 16px; padding: 8px 20px; }
+
+    .piece {
+      background-size: calc(90vw + 80px) calc(90vw + 80px);
+    }
+  }
+</style>
+</head>
+<body>
+
+<h1>بازی پازل کهکشانی</h1>
+<div id="puzzle"></div>
+<div id="message"></div>
+<div id="score">امتیاز: 0</div>
+<button onclick="shuffle()">شروع دوباره</button>
+
+<div class="stars" id="stars"></div>
+
+<script>
+  // ایجاد انیمیشن ستاره‌ها در پس‌زمینه
+  const starsContainer = document.getElementById('stars');
+  const starCount = 150;
+  for(let i=0; i<starCount; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    const size = Math.random() * 2 + 0.5;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.top = (Math.random() * 100) + '%';
+    star.style.left = (Math.random() * 100) + '%';
+    star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    star.style.animationDelay = (Math.random() * 5) + 's';
+    starsContainer.appendChild(star);
+  }
+
+  const size = 4;
+  let emptyPos = {row: size - 1, col: size - 1};
+  let currentStage = 0;
+  let score = 0;
+
+  // تصاویر سیارات: زمین، مریخ، زهره
+  const planetImages = [
+    'https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg'
+  ];
+
+  const puzzle = document.getElementById('puzzle');
+  const message = document.getElementById('message');
+  const scoreEl = document.getElementById('score');
+
+  function createPuzzle() {
+    puzzle.innerHTML = '';
+    for(let row = 0; row < size; row++) {
+      for(let col = 0; col < size; col++) {
+        const piece = document.createElement('div');
+        piece.classList.add('piece');
+        if(row === size -1 && col === size -1) {
+          piece.classList.add('empty');
+        } else {
+          piece.style.backgroundImage = `url('${planetImages[currentStage]}')`;
+          piece.style.backgroundPosition = `-${col * 100}px -${row * 100}px`;
+        }
+        piece.dataset.row = row;
+        piece.dataset.col = col;
+        piece.addEventListener('click', () => {
+          movePiece(row, col);
+        });
+        puzzle.appendChild(piece);
+      }
+    }
+  }
+
+  function movePiece(row, col) {
+    if((Math.abs(emptyPos.row - row) === 1 && emptyPos.col === col) ||
+       (Math.abs(emptyPos.col - col) === 1 && emptyPos.row === row)) {
+      swapPieces(row, col, emptyPos.row, emptyPos.col);
+      emptyPos = {row, col};
+      if(checkWin()) {
+        score++;
+        scoreEl.textContent = 'امتیاز: ' + score;
+        if(currentStage < planetImages.length - 1) {
+          currentStage++;
+          message.textContent = 'تبریک! مرحله بعدی';
+          setTimeout(() => {
+            message.textContent = '';
+            createPuzzle();
+            shuffle();
+          }, 2000);
+        } else {
+          message.textContent = '🎉 تبریک! همه مراحل تمام شد.';
+        }
+      } else {
+        message.textContent = '';
+      }
+    }
+  }
+
+  function swapPieces(r1, c1, r2, c2) {
+    const pieces = Array.from(document.querySelectorAll('#puzzle .piece'));
+    const index1 = r1 * size + c1;
+    const index2 = r2 * size + c2;
+
+    const tempBgPos = pieces[index1].style.backgroundPosition;
+    const tempBgImg = pieces[index1].style.backgroundImage;
+
+    pieces[index1].style.backgroundPosition = pieces[index2].style.backgroundPosition;
+    pieces[index1].style.backgroundImage = pieces[index2].style.backgroundImage;
+
+    pieces[index2].style.backgroundPosition = tempBgPos;
+    pieces[index2].style.backgroundImage = tempBgImg;
+
+    if(pieces[index1].classList.contains('empty')) {
+      pieces[index1].classList.remove('empty');
+      pieces[index2].classList.add('empty');
+    } else if(pieces[index2].classList.contains('empty')) {
+      pieces[index2].classList.remove('empty');
+      pieces[index1].classList.add('empty');
+    }
+  }
+
+  function checkWin() {
+    const pieces = Array.from(document.querySelectorAll('#puzzle .piece'));
+    for(let i = 0; i < pieces.length - 1; i++) {
+      const row = Math.floor(i / size);
+      const col = i % size;
+      const bgPos = pieces[i].style.backgroundPosition;
+      const bgImg = pieces[i].style.backgroundImage;
+      // چک می‌کنیم موقعیت و تصویر قطعه درست باشه
+      if(bgPos !== `-${col * 100}px -${row * 100}px`) return false;
+      if(!bgImg.includes(planetImages[currentStage])) return false;
+    }
+    return true;
+  }
+
+  function shuffle() {
+    message.textContent = '';
+    let moves = 1000;
+    while(moves > 0) {
+      const directions = [
+        {row: emptyPos.row - 1, col: emptyPos.col},
+        {row: emptyPos.row + 1, col: emptyPos.col},
+        {row: emptyPos.row, col: emptyPos.col -1},
+        {row: emptyPos.row, col: emptyPos.col +1},
+      ].filter(pos => pos.row >=0 && pos.row < size && pos.col >=0 && pos.col < size);
+
+      const move = directions[Math.floor(Math.random() * directions.length)];
+      swapPieces(emptyPos.row, emptyPos.col, move.row, move.col);
+      emptyPos = move;
+      moves--;
+    }
+  }
+
+  createPuzzle();
+  shuffle();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inter Astral </title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Mystery+Quest&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #140256 0%, #040634 100%);
+      color: white;
+    }
+
+    nav {
+      background-color: rgba(255, 255, 255, 0);
+      padding: 15px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+
+    nav a {
+      color: #e090fadb;
+      margin: 0 15px;
+      font-weight: bold;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: 16px;
+    }
+
+    nav a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #b169f8bd;
+    }
+
+    .header {
+      text-align: center;
+      padding: 60px 20px 20px;
+      background: radial-gradient(circle at center, #0b0033 0%, #000 100%);
+    }
+
+    .header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      background: url('https://i.imgur.com/wbFAIcP.jpeg') no-repeat center center fixed;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 30px;
+      background: radial-gradient(circle at center, #0b0033 0%, #000 100%);
+    }
+
+    .card {
+      background: radial-gradient(circle at center, #0b0033 0%, #000 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      width: 260px;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      backdrop-filter: blur(100px);
+      cursor: pointer;
+      height: 400px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card h2 {
+      font-size: 19px;
+      margin: 16px 10px 8px;
+      color: #bbb;
+    }
+
+    .card p {
+      font-size: 19px;
+      padding: 0 15px 20px;
+      color: #bbb;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .center-logo {
+  width: 450px;
+  margin: -110px auto 0px auto; /* کاهش فاصله از بالا */
+  padding-top: 20px; /* اگه لازم بود کمی فاصله از بالا اضافه بشه */
+  /*animation: glowPulse 3s infinite ease-in-out, fadeIn 2s ease-in-out forwards;
+  filter: drop-shadow(0 0 10px #dca0ff00) drop-shadow(0 0 20px #fff0ff12);
+  transition: transform 0.4s ease;*/
+}
+
+
+.center-logo:hover {
+  transform: scale(1.05) rotate(1deg);
+}
+
+.center-logo img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+@keyframes glowPulse {
+  0% {
+    filter: drop-shadow(0 0 10px #dca0ff) drop-shadow(0 0 20px #fff0ff);
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #ffccff) drop-shadow(0 0 40px #ffffff);
+    transform: scale(1.03);
+  }
+  100% {
+    filter: drop-shadow(0 0 10px #dca0ff) drop-shadow(0 0 20px #fff0ff);
+    transform: scale(1);
+  }
+}
+
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .meteor {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 4px rgba(255, 255, 255, 0.6);
+      animation: fall 5s linear forwards;
+      z-index: 0;
+    }
+
+    .meteor::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -1px;
+      width: 2px;
+      height: 60px;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.6), transparent);
+      transform: rotate(0deg);
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100px); opacity: 1; }
+      100% { transform: translateY(120vh); opacity: 0; }
+    }
+
+    .footer {
+      background: radial-gradient(circle at center, #0b0033 0%, #000 100%);
+      color: rgb(53, 46, 46);
+      text-align: center;
+      padding: 10px 20px;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .footer-content {
+      max-width: 400px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .footer-logo {
+      width: 80px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      margin-bottom: 10px;
+    }
+
+    .footer h2 {
+      margin: 5px 0;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .footer-text {
+      margin: 5px 0 10px;
+      font-size: 13px;
+      color: #f0ebeb;
+    }
+
+    .footer-links {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #f3e9e9;
+      text-decoration: none;
+      font-size: 13px;
+      margin: 0 6px;
+    }
+
+    .footer-links a:hover {
+      color: #f1eaea;
+    }
+
+    .footer-hr {
+      width: 60%;
+      border: none;
+      border-top: 1px solid rgba(41, 39, 39, 0.694);
+      margin: 12px auto;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: #fbf9f9d5;
+    }
+    @keyframes shimmer {
+    0% { background-position: -500px 0; }
+    100% { background-position: 500px 0; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .magic-text {
+    font-size: 40px;
+    font-family: 'Orbitron', 'Mystery Quest', cursive;
+    background: linear-gradient(90deg, #ef65da, #7d78e2, #c565eb);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    text-align: center;
+  }
+
+  .magic-text span {
+    display: inline-block;
+    animation: float 2s ease-in-out infinite;
+    padding: 0 2px;
+  }
+
+  .magic-text span:nth-child(odd) {
+    animation-delay: 0.2s;
+  }
+
+  .magic-text span:nth-child(even) {
+    animation-delay: 0.4s;
+  }
+
+  .magic-textt{
+    font-size: 28px;
+    font-family: 'Orbitron', 'Mystery Quest', cursive;
+    background: linear-gradient(90deg, #ce40f2, #7d78e2, #c565eb);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+    text-align: center;
+  }
+
+  .magic-textt span {
+    display: inline-block;
+    animation: float 2s ease-in-out infinite;
+    padding: 0 2px;
+  }
+
+  .magic-textt span:nth-child(odd) {
+    animation-delay: 0.2s;
+  }
+
+  .magic-textt span:nth-child(even) {
+    animation-delay: 0.4s;
+  }
+  body, html {
+  margin: 0; 
+  height: 100%;
+  background: #111; 
+  overflow-y: auto; /* اجازه اسکرول */
+}
+
+/* مخفی کردن موس در کل صفحه */
+* {
+  cursor: none !important;
+}
+
+#magic-wand {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100px; 
+  height: 200px;
+  pointer-events: none;
+  background: url('https://i.imgur.com/B1ZAjKE.png') no-repeat center / contain;
+  filter: drop-shadow(0 0 5px #f9c94e);
+  transform: translate(39%, 65%); /* ⬅️ جابجایی نوک چوب زیر موس */
+  transform-origin: bottom center;
+  transition: filter 0.3s ease;
+  z-index: 9999;
+}
+#magic-wand.glow {
+  animation: glowPulse 1.5s infinite alternate;
+  filter: drop-shadow(0 0 10px #f9c94e) drop-shadow(0 0 20px #f9c94e);
+}
+@keyframes glowPulse {
+  0% {
+    filter: drop-shadow(0 0 5px #f9c94e);
+  }
+  100% {
+    filter: drop-shadow(0 0 25px #f9c94e) drop-shadow(0 0 40px #ffec8b);
+  }
+}
+.magic-text2 {
+    font-size: 25px;
+    font-family: 'Orbitron', 'Mystery Quest', cursive;
+    background: linear-gradient(90deg, #fc83ea, #eac0e4, #ec71ec);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    
+    text-align: center;
+  }
+
+  </style>
+</head>
+
+<body>
+  
+  
+  
+  <div class="header">
+    <!-- لوگو در مرکز -->
+  <div class="center-logo">
+    <img src="https://i.imgur.com/yQHwOY1.gif" alt="Logo" />
+  </div>
+  <h1 class="magic-text">
+    Descubra os segredos do universo 
+  </h1>
+  <h1 class="magic-text">connosco ...</h1>
+  </div>
+
+
+
+  <div id="magic-wand"></div>
+
+  <script>
+    const wand = document.getElementById('magic-wand');
+
+    function moveWand(x, y) {
+      wand.style.left = (x - wand.offsetWidth / 2) + 'px';
+      wand.style.top = (y - wand.offsetHeight) + 'px';
+    }
+
+    window.addEventListener('mousemove', e => {
+      moveWand(e.clientX, e.clientY);
+    });
+
+    window.addEventListener('touchmove', e => {
+      const touch = e.touches[0];
+      moveWand(touch.clientX, touch.clientY);
+    }, {passive: true});
+
+    function glowEffect() {
+      wand.classList.add('glow');
+      setTimeout(() => {
+        wand.classList.remove('glow');
+      }, 1500);
+    }
+
+    window.addEventListener('click', glowEffect);
+    window.addEventListener('touchstart', glowEffect, {passive: true});
+
+    moveWand(window.innerWidth / 2, window.innerHeight / 2);
+  </script>
+
+
+  <div class="cards-container">
+    <!-- کارت‌ها -->
+    <a href="vidapassada.html">
+      <div class="card">
+        <img src="https://i.imgur.com/CRygwqN.png" alt="Café">
+        <h1 class="magic-textt">Vida Passada</h1>
+        <p>Sua alma guarda histórias que o tempo esqueceu. Descubra quem você foi e encontre respostas mágicas.</p>
+      </div>
+    </a>
+    <a href="cafe.html">
+      <div class="card">
+        <img src="https://i.imgur.com/uIlm0tB.jpeg" alt="Café">
+        <h1 class="magic-textt">Café Místico</h1>
+        <p>Venha tomar um café conosco e revelar os segredos mais profundos do seu coração</p>
+      </div>
+    </a>
+    <a href="taroot.html">
+      <div class="card">
+        <img src="https://i.imgur.com/ziiMn4e.jpeg" alt="Tarot">
+        <h1 class="magic-textt">Cartas </h1>
+        <p>de Autoconhecimento Uma leitura profunda e sincera para revelar seu mundo interior e guiar suas decisões futuras.</p>
+      </div>
+    </a>
+    <a href="oraclodia.html">
+      <div class="card">
+        <img src="https://i.imgur.com/76gE8Rp.jpeg" alt="Horóscopo Diário">
+        <h1 class="magic-textt">Horóscopo Diário</h1>
+        <p>Inspirações celestes diárias para guiar suas escolhas</p>
+      </div>
+    </a>
+    <a href="faleshgh.html">
+      <div class="card">
+        <img src="https://i.imgur.com/K0aBAci.jpeg" alt="Casamento">
+        <h1 class="magic-textt">Mapa do Amor</h1>
+        <p>Descubra os caminhos emocionais e compreenda sua situação atual nos relacionamentos.</p>
+      </div>
+    </a>
+    <a href="jazbeservat.html">
+      <div class="card">
+        <img src="https://i.imgur.com/07ed1Qo.jpeg" alt="Riqueza">
+        <h1 class="magic-textt">Chave da Prosperidade</h1>
+        <p>Explore caminhos conscientes para atrair abundância e fortalecer sua relação com o dinheiro.</p>
+      </div>
+    </a>
+    <a href="telesmeeshgh.html">
+      <div class="card">
+        <img src="https://i.imgur.com/0f8V15G.jpeg" alt="Amor Perdido">
+        <h1 class="magic-textt">Reconexão do Amor</h1>
+        <p>Compreenda sentimentos, cure relações passadas e abra espaço para o amor verdadeiro.</p>
+      </div>
+    </a>
+    <a href="tabirekhab.html">
+      <div class="card">
+        <img src="https://i.imgur.com/kUnp1sA.jpeg" alt="Sonhos">
+        <h1 class="magic-textt">Interpretação dos Sonhos</h1>
+        <p>Desvende as mensagens secretas que os seus sonhos tentam revelar.</p>
+      </div>
+    </a>
+  </div>
+
+  <script>
+    function createMeteor() {
+      const meteor = document.createElement('div');
+      meteor.classList.add('meteor');
+      meteor.style.left = Math.random() * window.innerWidth + 'px';
+      meteor.style.top = Math.random() * -200 + 'px';
+      meteor.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      document.body.appendChild(meteor);
+      setTimeout(() => meteor.remove(), 6000);
+    }
+    setInterval(createMeteor, 900);
+  </script>
+
+  <footer class="footer">
+    <div class="footer-content">
+      
+      
+      <h1 class="magic-text">InterAstral</h1>
+      <h1 class="magic-textt">Conectando você ao universo com mistério e magia ✨</h1>
+      <h1 class="magic-text2">✨ Apoie o nosso Encanto ✨</h1>
+     
+      <p style="margin-top: 15px; font-size: 14px; color: #ec70ec;">
+        Se você gostou desta experiência e deseja que criemos ainda mais encanto, por favor, considere apoiar-nos com a sua contribuição.
+        Até mesmo a menor contribuição é valiosa para mantermos este encanto vivo 🌟 </p>
+      <a href="https://buy.stripe.com/14A14o0tB1sa2Zw7NQ0oM01" target="_blank" style="
+        display: inline-block;
+        padding: 14px 30px;
+        background: linear-gradient(90deg, #f7d560, #e0b3ff);
+        color: #1a0c2b;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 0 20px #f7d560;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      " onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 0 30px #f7d560';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px #f7d560';">
+         Apoiar Financeiramente❤️
+      </a>
+      <p style="margin-top: 15px; font-size: 14px; color: #ccc;">
+        
+      </p>
+      <div class="footer-links">
+        <a href="https://instagram.com/astralstelar" target="_blank">Instagram</a> • 
+        <a href="contacto.html">Contato</a> • 
+        <a href="puzzle.html">Puzzle</a>
+      </div>
+      <hr class="footer-hr" />
+      <p style="margin-top: 15px; font-size: 14px; color: #cccccca7;">© 2025 InterAstral. Todos os direitos reservados.</p>
+      <img src="https://i.imgur.com/xBK7p6T.jpeg" alt="InterAstral Logo" class="footer-logo" />
+    </div>
+   
+    
+  </footer>
+
+  
+</body> 
+</html>

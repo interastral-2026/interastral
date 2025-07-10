@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>فال تاروت اسرارآمیز</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Cinzel Decorative', cursive;
+      background-image: url('https://i.imgur.com/VgVbDJs.jpeg');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      color: #f0eade;
+      padding: 20px;
+      margin: auto;
+      direction: rtl;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fcd34d;
+      text-shadow: 2px 2px #000;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+    }
+
+    form {
+      background: rgba(64, 63, 63, 0.483);
+      padding: 25px;
+      border-radius: 20px;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 0 30px rgba(252, 211, 77, 0.6);
+      backdrop-filter: blur(6px);
+      direction: rtl;
+      text-align: right;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      font-size: 1em;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: 1px solid #fcd34d;
+      background-color: rgba(31, 41, 55, 0.9);
+      color: #fef9c3;
+      border-radius: 10px;
+      box-sizing: border-box;
+      font-size: 1em;
+      direction: rtl;
+      text-align: right;
+    }
+
+    button {
+      margin-top: 30px;
+      background: linear-gradient(135deg, #fcd34d, #fde68a);
+      color: #000;
+      padding: 14px 24px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 1em;
+      width: 100%;
+      box-shadow: 0 0 15px #fcd34d;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #fff3b0, #fcd34d);
+      transform: scale(1.02);
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 15px 0;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.2);
+    }
+
+    .navbar a {
+      font-family: 'Great Vibes', cursive;
+      color: #fcd34d;
+      margin: 0 20px;
+      font-size: 1.4em;
+      text-decoration: none;
+      position: relative;
+    }
+
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: #ff7bbe;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover {
+      color: #ff7bbe;
+      text-shadow: 0 0 10px #ff7bbe;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        padding: 25px 20px;
+      }
+
+      h2 {
+        font-size: 2.2em;
+      }
+
+      .navbar a {
+        font-size: 1.2em;
+        margin: 0 10px;
+      }
+
+      body {
+        padding: 100px 10px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <nav class="navbar">
+    <a href="index.html">بازگشت</a>
+  </nav>
+
+  <h1>فال تاروت اسرارآمیز 🔮</h1>
+  <form id="tarotForm">
+    <label for="first_name">نام شما چیست؟</label>
+    <input type="text" id="first_name" name="first_name" required />
+
+    <label for="focus">مایلید کدام جنبه از زندگی‌تان در این فال بررسی شود؟</label>
+    <select id="focus" name="focus" required>
+      <option value="">انتخاب کنید...</option>
+      <option value="عشق">عشق</option>
+      <option value="شغل">شغل</option>
+      <option value="سلامتی">سلامتی</option>
+      <option value="معنویت">معنویت</option>
+    </select>
+
+    <label for="situation">به‌طور خلاصه وضعیت یا پرسش خاص خود را توضیح دهید:</label>
+    <textarea id="situation" name="situation" rows="3"></textarea>
+    
+    <label for="birth_date">تاریخ تولد:</label>
+    <input type="date" id="birth_date" name="birth_date" required />
+    
+    <label for="birth_place">محل تولد:</label>
+    <input type="text" id="birth_place" name="birth_place" required />
+    
+    <label for="birth_time">ساعت تولد (اختیاری):</label>
+    <input type="time" id="birth_time" name="birth_time" />
+    
+    <label for="gender">جنسیت:</label>
+    <select id="gender" name="gender" required>
+      <option value="">انتخاب کنید...</option>
+      <option value="زن">زن</option>
+      <option value="مرد">مرد</option>
+      <option value="دیگر">دیگر</option>
+    </select>
+    
+    <label for="occupation">شغل شما:</label>
+    <input type="text" id="occupation" name="occupation" required />
+    
+    <label for="feeling">اکنون چه احساسی دارید؟</label>
+    <select id="feeling" name="feeling" required>
+      <option value="">انتخاب کنید...</option>
+      <option value="گیج">گیج</option>
+      <option value="امیدوار">امیدوار</option>
+      <option value="اضطراب">اضطراب</option>
+      <option value="قدردان">قدردان</option>
+    </select>
+
+    <label for="email">ایمیل شما برای دریافت فال:</label>
+    <input type="email" id="email" name="email" required />
+
+    <button type="submit">✨ مشاهده فال من</button>
+  </form>
+
+  <script>
+    function generateUniqueId() {
+      return 'id-' + Math.random().toString(36).substr(2, 9);
+    }
+
+    document.getElementById('tarotForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const submission_id = generateUniqueId();
+      const formData = {
+        submission_id,
+        first_name: document.getElementById('first_name').value,
+        focus: document.getElementById('focus').value,
+        situation: document.getElementById('situation').value,
+        feeling: document.getElementById('feeling').value,
+        email: document.getElementById('email').value,
+        birth_date: document.getElementById('birth_date').value,
+        birth_place: document.getElementById('birth_place').value,
+        birth_time: document.getElementById('birth_time').value,
+        gender: document.getElementById('gender').value,
+        occupation: document.getElementById('occupation').value,
+      };
+
+      const paymentTab = window.open('', '_blank');
+
+      try {
+        const response = await fetch("https://hook.eu2.make.com/mtaocgp9oyh8ihm1k55a4yy5h600rk9l", {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: { "Content-Type": "application/json" }
+        });
+
+        const data = await response.json();
+
+        if (data.payment_url) {
+          paymentTab.location.href = data.payment_url;
+        } else {
+          paymentTab.close();
+          alert("خطا در آغاز پرداخت. لطفاً دوباره تلاش کنید.");
+        }
+      } catch (error) {
+        paymentTab.close();
+        alert("خطا در ارتباط با سرور.");
+        console.error(error);
+      }
+    });
+  </script>
+</body>
+</html>
