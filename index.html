@@ -1,87 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta charset="UTF-8" />
-  <title>WELCOME TO INTERASTRAL</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro Mágico</title>
   <style>
-    /* بک‌گراند بلوری تار */
     body {
-      margin: 0; padding: 0;
-      font-family: "Vazir", sans-serif;
-      background: url('https://i.imgur.com/DMvHPUA.jpeg') no-repeat center center fixed;
-      background-size: cover;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at center, #140256 0%, #040634 100%);
+      color: white;
     }
-    /* لایه بلوری روی بک‌گراند */
+    nav {
+      background-color: rgba(255, 255, 255, 0);
+      padding: 15px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+    nav a {
+      color: #e090fadb;
+      margin: 0 15px;
+      font-weight: bold;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: 16px;
+    }
+    nav a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #b169f8bd;
+    }
+    .header {
+      text-align: center;
+      padding: 60px 20px 20px;
+      background: radial-gradient(circle at center, #0b0033 0%, #000 100%);
+    }
+    .header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      background: url('https://i.imgur.com/wbFAIcP.jpeg') no-repeat center center fixed;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    form {
+      max-width: 400px;
+      margin: 50px auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px #b169f8bd;
+      display: none; /* پنهان تا انتخاب زبان */
+    }
+    form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background: linear-gradient(90deg, #ef65da, #7d78e2, #c565eb);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #c565eb;
+    }
+    .magic-text {
+      font-size: 40px;
+      background: linear-gradient(90deg, #ef65da, #7d78e2, #c565eb);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-top: 30px;
+    }
     #blurOverlay {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255 255 255 / 0.2);
-      backdrop-filter: blur(1px);
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
     }
-    /* پنجره انتخاب زبان */
     #langPopup {
-      background: rgba(255 255 255 / 0.8);
+      background: #1a083d;
+      padding: 30px;
       border-radius: 15px;
-      padding: 30px 40px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      box-shadow: 0 0 20px #c565eb;
       text-align: center;
-      max-width: 320px;
-      width: 90%;
-    }
-    #langPopup h2 {
-      margin-bottom: 20px;
-      color: #333;
     }
     .lang-btn {
-      cursor: pointer;
-      font-size: 18px;
-      padding: 10px 20px;
       margin: 10px;
+      padding: 12px 20px;
+      font-size: 18px;
       border: none;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      user-select: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #ef65da, #7d78e2, #c565eb);
+      color: white;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
- 
-    .lang-btn.portuguese {
-      background-color: #edf5f2;
-      color: rgb(72, 83, 236);
+    .lang-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #c565eb;
     }
   </style>
 </head>
 <body>
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Sobre</a>
+    <a href="#">Contato</a>
+  </nav>
+  <div class="header">
+    <h1>🌌 Registro Mágico 🌌</h1>
+    <p class="magic-text">Descubra sua Jornada Astral</p>
+  </div>
 
+  <!-- Language Selection Popup -->
   <div id="blurOverlay">
     <div id="langPopup">
-      
-      <button class="lang-btn portuguese" onclick="chooseLang('fa')">فارسی</button>
-      <button class="lang-btn portuguese" onclick="chooseLang('pt')">Português</button>
-      <button class="lang-btn portuguese" onclick="chooseLang('eng')">english</button>
-      <button class="lang-btn portuguese" onclick="chooseLang('fr')">french</button>
+      <h2>انتخاب زبان</h2>
+      <button class="lang-btn" onclick="chooseLang('fa')">فارسی</button>
+      <button class="lang-btn" onclick="chooseLang('pt')">Português</button>
+      <button class="lang-btn" onclick="chooseLang('eng')">English</button>
+      <button class="lang-btn" onclick="chooseLang('fr')">Français</button>
     </div>
   </div>
 
-  <script>
-    function chooseLang(lang) {
-      // ذخیره انتخاب زبان در localStorage (اختیاری)
-      localStorage.setItem('preferredLang', lang);
+  <!-- Registration Form -->
+  <form id="registerForm">
+    <h2>Cadastre-se</h2>
+    <input type="text" name="name" placeholder="Nome completo" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="phone" placeholder="Telefone" required>
+    <input type="hidden" name="language" id="languageInput">
+    <button type="submit">Registrar</button>
+  </form>
 
-      // هدایت به پوشه زبان مربوطه
-      window.location.href = `${lang}/index.html`;
+  <script>
+    let selectedLang = '';
+
+    function chooseLang(lang) {
+      selectedLang = lang;
+      localStorage.setItem('preferredLang', lang);
+      document.getElementById('languageInput').value = lang;
+      document.getElementById('blurOverlay').style.display = 'none';
+      document.getElementById('registerForm').style.display = 'block';
     }
 
-    // اگر قبلاً زبان انتخاب شده، مستقیم هدایت کن (بدون نمایش پاپ‌آپ)
-    window.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const savedLang = localStorage.getItem('preferredLang');
-      /*if(savedLang){
-        window.location.href = `/${savedLang}/index.html`;
+      /*if (savedLang) {
+        selectedLang = savedLang;
+        document.getElementById('languageInput').value = savedLang;
+        document.getElementById('blurOverlay').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
       }*/
+    });
+
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = {};
+      formData.forEach((value, key) => data[key] = value);
+
+      // ایجاد لینک referral
+      const referralLink = `${window.location.origin}/?ref=${encodeURIComponent(data.email)}`;
+      data.referral = referralLink;
+
+      fetch('https://hook.eu2.make.com/ow0bgvxzxsyssihnvzojkwrwspdi5toi', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = `/${selectedLang}/index.html`;
+        } else {
+          alert("Erro no registro. Tente novamente.");
+        }
+      })
+      .catch(err => alert("Erro na conexão com o servidor."));
     });
   </script>
 </body>
