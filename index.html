@@ -172,16 +172,19 @@
     document.getElementById('registerForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const formData = new FormData(this);
+      
       const data = {};
       formData.forEach((value, key) => data[key] = value);
+
 
       // ایجاد لینک referral
       const referralLink = `${window.location.origin}/?ref=${encodeURIComponent(data.email)}`;
       data.referral = referralLink;
-      const urlParams = new URLSearchParams(window.location.search);
+
+const urlParams = new URLSearchParams(window.location.search);
 const ref = urlParams.get('ref');
 if (ref) {
-  data.ref = ref;
+  data.ref = ref; // اضافه کردن ref به داده‌هایی که ارسال می‌کنی
 }
 
       fetch('https://hook.eu2.make.com/ow0bgvxzxsyssihnvzojkwrwspdi5toi', {
