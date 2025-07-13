@@ -178,6 +178,11 @@
       // ایجاد لینک referral
       const referralLink = `${window.location.origin}/?ref=${encodeURIComponent(data.email)}`;
       data.referral = referralLink;
+      const urlParams = new URLSearchParams(window.location.search);
+const ref = urlParams.get('ref');
+if (ref) {
+  data.ref = ref;
+}
 
       fetch('https://hook.eu2.make.com/ow0bgvxzxsyssihnvzojkwrwspdi5toi', {
         method: 'POST',
