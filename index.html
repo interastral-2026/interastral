@@ -120,87 +120,69 @@
   </style>
 </head>
 <body>
- 
-  <div class="header">
-    <h1> Registro Mágico </h1>
-    <p class="magic-text">Descubra sua Jornada Astral</p>
+ <!-- Popup انتخاب زبان -->
+<div id="languagePopup" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center; z-index: 9999;">
+  <div style="background: white; padding: 30px; border-radius: 15px; text-align: center;">
+    <h2>Choose Your Language</h2>
+    <button onclick="goToLanguage('fa')" style="margin: 10px; padding: 10px 20px;">🇮🇷 فارسی</button>
+    <button onclick="goToLanguage('pt')" style="margin: 10px; padding: 10px 20px;">🇧🇷 Português</button>
+    <button onclick="goToLanguage('en')" style="margin: 10px; padding: 10px 20px;">🇬🇧 English</button>
+    <button onclick="goToLanguage('fr')" style="margin: 10px; padding: 10px 20px;">🇫🇷 Français</button>
   </div>
+</div>
 
-  <!-- Language Selection Popup -->
-  <div id="blurOverlay">
-    <div id="langPopup">
-      
-     
-      <button class="lang-btn" onclick="chooseLang('pt')">Português</button>
-      <button class="lang-btn" onclick="chooseLang('eng')">English</button>
-      <button class="lang-btn" onclick="chooseLang('fr')">Français</button>
-      <button class="lang-btn" onclick="chooseLang('fa')">فارسی</button>
-    </div>
-  </div>
-
-  <!-- Registration Form -->
-  <form id="registerForm">
-    <h2></h2>
-    <input type="text" name="name" placeholder="Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    
-    <input type="hidden" name="language" id="languageInput">
-    <button type="submit">Registrar</button>
-  </form>
-
-  <script>
-    let selectedLang = '';
-
-    function chooseLang(lang) {
-      selectedLang = lang;
-      localStorage.setItem('preferredLang', lang);
-      document.getElementById('languageInput').value = lang;
-      document.getElementById('blurOverlay').style.display = 'none';
-      document.getElementById('registerForm').style.display = 'block';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedLang = localStorage.getItem('preferredLang');
-      /*if (savedLang) {
-        selectedLang = savedLang;
-        document.getElementById('languageInput').value = savedLang;
-        document.getElementById('blurOverlay').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'block';
-      }*/
-    });
-
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      
-      const data = {};
-      formData.forEach((value, key) => data[key] = value);
-
-
-      // ایجاد لینک referral
-      const referralLink = `${window.location.origin}/?ref=${encodeURIComponent(data.email)}`;
-      data.referral = referralLink;
-
-const urlParams = new URLSearchParams(window.location.search);
-const ref = urlParams.get('ref');
-if (ref) {
-  data.ref = ref; // اضافه کردن ref به داده‌هایی که ارسال می‌کنی
+<script>
+function goToLanguage(lang) {
+  switch(lang) {
+    case 'fa':
+      window.location.href = '/fa/index.html'; // مسیر صفحه فارسی
+      break;
+    case 'pt':
+      window.location.href = '/pt/index.html'; // مسیر صفحه پرتغالی
+      break;
+    case 'en':
+      window.location.href = '/en/index.html'; // مسیر صفحه انگلیسی (باید ایجاد کنی)
+      break;
+    case 'fr':
+      window.location.href = '/fr/index.html'; // مسیر صفحه فرانسوی (باید ایجاد کنی)
+      break;
+    default:
+      // اگر زبانی ناشناخته بود، کاری نکن یا صفحه پیشفرض
+      break;
+  }
 }
-
-      fetch('https://hook.eu2.make.com/ow0bgvxzxsyssihnvzojkwrwspdi5toi', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = `/${selectedLang}/index.html`;
-        } else {
-          alert("Erro no registro. Tente novamente.");
-        }
-      })
-      .catch(err => alert("Erro na conexão com o servidor."));
-    });
+</script>
+<script>
+  // گرفتن پارامتر referral از URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const refCode = urlParams.get('ref');
+  
+  if (refCode) {
+    // گرفتن آی‌پی بازدیدکننده
+    fetch('https://api.ipify.org?format=json')
+      .then(res => res.json())
+      .then(data => {
+        const ip = data.ip;
+        const timestamp = new Date().toISOString();
+  
+        // ارسال اطلاعات به Webhook ثبت کلیک
+        fetch('https://hook.eu2.make.com/ow0bgvxzxsyssihnvzojkwrwspdi5toi', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            referralCode: refCode,
+            ip: ip,
+            timestamp: timestamp
+          })
+        })
+        .then(response => console.log('کلیک ثبت شد'))
+        .catch(error => console.error('خطا در ثبت کلیک:', error));
+      });
+  }
   </script>
+  
+
 </body>
 </html>
