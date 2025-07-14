@@ -183,7 +183,7 @@
     <h1>✨ Création du Symbole Magique de la Richesse ✨</h1>
   
     <form id="talismForm">
-      <input type="hidden" name="lang" value="pt">
+      
       <label>Nom complet :</label>
       <input type="text" name="nome" required>
   
@@ -230,6 +230,13 @@
   
         const form = event.target;
         const formData = {};
+        const pathSegments = window.location.pathname.split('/');
+  const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
+
+  formData.lang = lang; // اضافه کردن به داده‌ها
+      [...form.elements].forEach(el => {
+        if (el.name) formData[el.name] = el.value;
+      });
   
         [...form.elements].forEach(el => {
           if (el.name) formData[el.name] = el.value;
