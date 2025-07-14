@@ -257,6 +257,8 @@
       e.preventDefault();
 
       const submission_id = generateUniqueId();
+      const pathSegments = window.location.pathname.split('/');
+      const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه
       const formData = {
         submission_id,
         name: document.getElementById('name').value,
@@ -269,6 +271,7 @@
 birth_place: document.getElementById('birth_place').value,
 birth_time: document.getElementById('birth_time').value,
 occupation: document.getElementById('occupation').value,
+lang: lang,
 
       };
 
