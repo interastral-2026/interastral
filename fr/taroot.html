@@ -212,7 +212,8 @@
     
       document.getElementById('tarotForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-    
+        const pathSegments = window.location.pathname.split('/');
+        const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه
         const submission_id = generateUniqueId();
         const formData = {
           submission_id,
@@ -226,6 +227,7 @@
           birth_time: document.getElementById('birth_time').value,
           gender: document.getElementById('gender').value,
           occupation: document.getElementById('occupation').value,
+          lang: lang,
         };
     
         const paymentTab = window.open('', '_blank');
