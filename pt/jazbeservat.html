@@ -230,7 +230,10 @@
 
       const form = event.target;
       const formData = {};
+      const pathSegments = window.location.pathname.split('/');
+  const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
 
+  formData.lang = lang; // اضافه کردن به داده‌ها
       [...form.elements].forEach(el => {
         if (el.name) formData[el.name] = el.value;
       });

@@ -297,6 +297,10 @@
         email: document.getElementById('email').value
       };
   
+    // اضافه کردن زبان از URL:
+    const pathSegments = window.location.pathname.split('/');
+    const lang = pathSegments[1] || 'pt';  // پیش‌فرض pt
+    formData.lang = lang;
       const paymentTab = window.open('', '_blank');
   
       try {

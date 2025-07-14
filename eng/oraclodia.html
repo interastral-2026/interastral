@@ -288,6 +288,7 @@
         e.preventDefault();
   
         const submission_id = generateUniqueId();
+        
         const formData = {
           submission_id,
           first_name: document.getElementById('first_name').value,
@@ -302,6 +303,11 @@
           important_thought: document.getElementById('important_thought').value,
           email: document.getElementById('email').value
         };
+
+    // اضافه کردن زبان از URL:
+    const pathSegments = window.location.pathname.split('/');
+    const lang = pathSegments[1] || 'pt';  // پیش‌فرض pt
+    formData.lang = lang;
   
         const paymentTab = window.open('', '_blank');
   
