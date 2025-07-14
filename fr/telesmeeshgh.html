@@ -174,12 +174,11 @@
   </style>
 </head>
 <body>
-  Voici ta version en français, tout en gardant la structure HTML intacte :
-
-```html
-<nav class="navbar">
-  <a href="index.html">retour</a>
-</nav>
+  
+  
+  <nav class="navbar">
+     <a href="index.html">retour</a>
+   </nav>
 
 <div class="container">
   <form id="lostLoveForm">
@@ -244,6 +243,10 @@
     event.preventDefault();
 
     const formData = {};
+    const pathSegments = window.location.pathname.split('/');
+  const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
+
+  formData.lang = lang; // اضافه کردن به داده‌ها
     const inputs = this.querySelectorAll("input, textarea, select");
     inputs.forEach(input => {
       formData[input.name] = input.value;

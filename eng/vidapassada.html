@@ -188,6 +188,10 @@
         e.preventDefault();
         const form = e.target;
         const formData = new FormData(form);
+        const pathSegments = window.location.pathname.split('/');
+  const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
+
+  formData.lang = lang; // اضافه کردن به داده‌ها
   
         const photoFile = formData.get("photo");
         let photoUrl = "";
