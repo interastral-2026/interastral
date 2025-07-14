@@ -212,7 +212,7 @@
   </head>
   <body>
     <nav>
-      <a href="servisos.html">back</a>
+      <a href="index.html">back</a>
     </nav>
   
     <form id="reflectionForm">
@@ -275,6 +275,8 @@
       <!-- 11. Email -->
       <label for="email">Where should the universe send your reading?</label>
       <input type="email" id="email" name="email" required />
+      <label for="promo">🎁 Promo Code (if you have one):</label>
+      <input type="text" id="promo" name="promo" placeholder="e.g. VIP_1234">
   
       <button type="submit">🔮 Receive My Daily Vision</button>
     </form>
@@ -301,7 +303,8 @@
           emotion: document.getElementById('emotion').value,
           desire_today: document.getElementById('desire_today').value,
           important_thought: document.getElementById('important_thought').value,
-          email: document.getElementById('email').value
+          email: document.getElementById('email').value,
+          promo: document.getElementById('promo').value
         };
 
     // اضافه کردن زبان از URL:

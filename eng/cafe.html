@@ -176,7 +176,7 @@
 </head>
 <body>
   <nav class="navbar">
-    <a href="servisos.html">back</a>
+    <a href="index.html">back</a>
   </nav>
   </style>
   </head>
@@ -234,7 +234,9 @@
   
       <label for="email">Please enter your email to receive the reading:</label>
       <input type="email" id="email" name="email" required />
-  
+      <label for="promo">🎁 Promo Code (if you have one):</label>
+<input type="text" id="promo" name="promo" placeholder="e.g. VIP_1234">
+
       <button type="submit">Submit and Receive Reading</button>
     </form>
   
@@ -262,6 +264,7 @@ const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی �
           birth_time: document.getElementById('birth_time').value,
           occupation: document.getElementById('occupation').value,
           lang: lang,
+          promo: document.getElementById('promo').value,
         };
   
         const paymentTab = window.open('', '_blank');
