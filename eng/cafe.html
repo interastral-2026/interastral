@@ -245,7 +245,9 @@
   
       document.getElementById('cafeForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-  
+        const pathSegments = window.location.pathname.split('/');
+const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه
+
         const submission_id = generateUniqueId();
         const formData = {
           submission_id,
@@ -259,6 +261,7 @@
           birth_place: document.getElementById('birth_place').value,
           birth_time: document.getElementById('birth_time').value,
           occupation: document.getElementById('occupation').value,
+          lang: lang,
         };
   
         const paymentTab = window.open('', '_blank');

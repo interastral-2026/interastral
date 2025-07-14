@@ -343,6 +343,12 @@
 </head>
 
 <body>
+    <!-- دکمه نمایش popup -->
+    <button id="showPopupBtn" style="background:#4CAF50; color:#fff; padding:12px 24px; border:none; border-radius:8px; cursor:pointer; font-size:16px;">
+      🎁 Partagez avec 5 amis et RECEVEZ une lecture gratuite !
+
+    </button>
+    
   
   <div class="header">
     <!-- Logo au centre -->
@@ -354,6 +360,135 @@
     </h1>
     <h1 class="magic-text">avec nous ...</h1>
   </div>
+  
+ <!-- popup link -->
+  
+  <!-- popup link -->
+<div id="formPopup" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); display:none; justify-content:center; align-items:center; z-index:9999;">
+  <div style="
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    padding:30px;
+    text-align:center;
+    position:relative;
+    max-width:400px;
+    width:90%;
+    color:#fff;
+  ">
+    <!-- Close Button -->
+    <span id="closePopupBtn" style="position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer;">&times;</span>
+
+    <h2>🎉 Recevez votre lien exclusif</h2>
+    <form id="popupForm">
+      <input type="text" name="name" placeholder="Votre nom" required style="margin:10px 0; width:90%; padding:10px; border:1px solid #ccc; border-radius:6px;">
+      <input type="email" name="email" placeholder="Votre e-mail" required style="margin:10px 0; width:90%; padding:10px; border:1px solid #ccc; border-radius:6px;">
+      <button type="submit" style="margin:10px 0; padding:10px 20px; background:#4CAF50; color:#fff; border:none; border-radius:6px; cursor:pointer;">
+        Générer le lien
+      </button>
+    </form>
+    <p id="responseMessage" style="margin-top:10px; color:lightgreen;"></p>
+  </div>
+</div>
+
+  <script>
+    // نمایش و بستن popup
+    const showPopupBtn = document.getElementById("showPopupBtn");
+    const closePopupBtn = document.getElementById("closePopupBtn");
+    const formPopup = document.getElementById("formPopup");
+  
+    showPopupBtn.onclick = () => formPopup.style.display = "flex";
+    closePopupBtn.onclick = () => formPopup.style.display = "none";
+    window.onclick = (event) => {
+      if (event.target == formPopup) formPopup.style.display = "none";
+    }
+  
+    // گرفتن زبان از URL
+    const pathSegments = window.location.pathname.split('/');
+    const lang = pathSegments[1] || 'pt'; // پیش‌فرض pt اگر چیزی نبود
+  
+    // تولید کد رفرال
+    function generateReferralCode(length = 6) {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let code = '';
+      for (let i = 0; i < length; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return code;
+    }
+  
+    // ارسال فرم
+    document.getElementById("popupForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = e.target.name.value;
+      const email = e.target.email.value;
+      const referralCode = generateReferralCode();
+  
+      fetch("https://hook.eu2.make.com/ow0bgvxzxsyssihnvzojkwrwspdi5toi", { // Webhook
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, referralCode, lang })
+      })
+      .then(response => {
+        if (response.ok) {
+          const link = `${window.location.origin}/${lang}/?ref=${referralCode}`;
+          document.getElementById("responseMessage").innerHTML = `
+            ✅ Votre lien exclusif : <br>
+      <a href="${link}" target="_blank" style="color:#00f;">${link}</a>
+      <br>
+      <button onclick="shareLink('${link}')" style="margin-top:10px; padding:6px 12px; background:#2196F3; color:#fff; border:none; border-radius:4px; cursor:pointer;">
+        📤 Partager le lien
+      </button>
+    `;
+          e.target.reset();
+        } else {
+          document.getElementById("responseMessage").textContent = "❌ Ocorreu um erro. Tente novamente.";
+        }
+      })
+      .catch(error => {
+        document.getElementById("responseMessage").textContent = "❌ Erro ao enviar!";
+        console.error(error);
+      });
+    });
+    function shareLink(link) {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Inter Astral',
+      text: 'Entrez dans le monde mystérieux d’Inter Astral avec ce lien spécial. Partagez-le et obtenez votre lecture gratuite !',
+
+      url: link
+    })
+    .then(() => console.log('Partage réussi'))
+    .catch(() => alert('Le partage a échoué'));
+  } else {
+    navigator.clipboard.writeText(link);
+    alert("Lien copié ! Vous pouvez maintenant le partager.");
+  }
+}
+  
+    // ثبت کلیک referral
+    const urlParams = new URLSearchParams(window.location.search);
+    const refCode = urlParams.get('ref');
+    if (refCode) {
+      fetch("https://api.ipify.org?format=json")
+        .then(res => res.json())
+        .then(data => {
+          fetch("https://hook.eu2.make.com/ow0bgvxzxsyssihnvzojkwrwspdi5toi", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              referralCode: refCode,
+              ip: data.ip,
+              timestamp: new Date().toISOString(),
+              lang: lang
+            })
+          });
+        });
+    }
+  </script>
   
   <div id="magic-wand"></div>
   

@@ -346,7 +346,8 @@
   
   <!-- دکمه نمایش popup -->
   <button id="showPopupBtn" style="background:#4CAF50; color:#fff; padding:12px 24px; border:none; border-radius:8px; cursor:pointer; font-size:16px;">
-    🎁 Receber Link
+    🎁 Indique para 5 amigos e GANHE uma leitura grátis!
+
   </button>
   
   <div class="header">
@@ -476,7 +477,7 @@
    
     
   </footer>
-  !-- Popup -->
+  !-- Popup --
   <div id="formPopup" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); display:none; justify-content:center; align-items:center; z-index:9999;">
     <div style="
       background: rgba(255, 255, 255, 0.15);
@@ -564,10 +565,22 @@
       });
     });
   
-    function copyLink(link) {
-      navigator.clipboard.writeText(link);
-      alert("📋 Link copiado!");
-    }
+function shareLink(link) {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Inter Astral',
+      text: 'Entre no mundo misterioso do Inter Astral com este link especial. Compartilhe e ganhe sua leitura gratuita!',
+
+      url: link
+    })
+    .then(() => console.log('Partage réussi'))
+    .catch(() => alert('Le partage a échoué'));
+  } else {
+    navigator.clipboard.writeText(link);
+    alert("Lien copié ! Vous pouvez maintenant le partager.");
+  }
+}
+
   
     // ثبت کلیک referral
     const urlParams = new URLSearchParams(window.location.search);
