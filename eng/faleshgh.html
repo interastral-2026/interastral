@@ -151,7 +151,7 @@
   <div class="container">
     <h2>🔮 Personalized Love Reading</h2>
     <form id="loveForm">
-      <input type="hidden" name="lang" value="pt">
+      
       <label>Your name:</label>
       <input type="text" name="your_name" required>
   
@@ -200,6 +200,10 @@
         formData[input.name] = input.value;
       });
   
+      const pathSegments = window.location.pathname.split('/');
+  const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
+
+  formData.lang = lang; // اضافه کردن به داده‌ها
       const paymentTab = window.open('', '_blank');
   
       try {
