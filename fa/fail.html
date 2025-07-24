@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Failed</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80') center;
+      background-size: cover;
+      color: white;
+    }
+    .card {
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      padding: 40px;
+      max-width: 500px;
+      margin: 120px auto;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(255, 0, 90, 0.3);
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #ffbfc5;
+      margin-bottom: 10px;
+    }
+    h2 {
+      font-size: 1.2rem;
+      color: #ffd2d8;
+      margin-bottom: 30px;
+    }
+    button {
+      background: linear-gradient(90deg, #ff416c, #ff4b2b);
+      border: none;
+      padding: 12px 25px;
+      color: white;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff4b2b;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title"></h1>
+    <h2 id="desc"></h2>
+    <button onclick="history.back()" id="button"></button>
+  </div>
+
+  <script>
+    const pathLang = window.location.pathname.split("/")[1];
+
+    const messages = {
+      fa: {
+        title: "پرداخت ناموفق بود",
+        desc: "متأسفانه مشکلی در پرداخت شما به وجود آمد.",
+        button: "بازگشت"
+      },
+      pt: {
+        title: "Pagamento falhou",
+        desc: "Infelizmente, houve um problema com seu pagamento.",
+        button: "Voltar"
+      },
+      eng: {
+        title: "Payment Failed",
+        desc: "Unfortunately, there was a problem with your payment.",
+        button: "Go back"
+      },
+      fr: {
+        title: "Échec du paiement",
+        desc: "Malheureusement, un problème est survenu lors de votre paiement.",
+        button: "Retour"
+      }
+    };
+
+    const msg = messages[pathLang] || messages.eng;
+
+    document.getElementById("title").textContent = msg.title;
+    document.getElementById("desc").textContent = msg.desc;
+    document.getElementById("button").textContent = msg.button;
+  </script>
+</body>
+</html>
