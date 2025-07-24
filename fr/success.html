@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Success</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80') center;
+      color: white;
+    }
+    nav {
+      background-color: rgba(255, 255, 255, 0);
+      padding: 15px 0;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+    }
+    nav a {
+      color: #e090fadb;
+      margin: 0 15px;
+      font-weight: bold;
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: 16px;
+    }
+    nav a:hover {
+      color: #fff;
+      text-shadow: 0 0 8px #b169f8bd;
+    }
+    .header {
+      text-align: center;
+      padding: 60px 20px 20px;
+      background: radial-gradient(circle at center, #0b0033 0%, #000 100%);
+    }
+    .header h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+      background: url('https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    form {
+      max-width: 400px;
+      margin: 50px auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 20px #b169f8bd;
+      display: none; /* پنهان تا انتخاب زبان */
+    }
+    form h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    button {
+      background: linear-gradient(90deg, #ef65da, #7d78e2, #c565eb);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #c565eb;
+    }
+    .magic-text {
+      font-size: 40px;
+      background: linear-gradient(90deg, #f8d5f3, #9793eb, #d18eec);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-top: 30px;
+    }
+    .success-message {
+      display: none;
+      font-size: 18px;
+      color: #b6f1ff;
+      margin-top: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    #blurOverlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #langPopup {
+      background: #1a083d;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #c565eb;
+      text-align: center;
+    }
+    .lang-btn {
+      margin: 10px;
+      padding: 12px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: linear-gradient(90deg, #ef65da, #7d78e2, #c565eb);
+      color: white;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .lang-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #c565eb;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 2.2rem;
+      color: #ffffff;
+      background: linear-gradient(45deg, #fff, #ede5f7, #86f0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2 {
+    font-size: 1.2em;
+    text-align: center;
+    color: #f6e3ec;
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px #f5afd2;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title"></h1>
+    <h2 id="desc"></h2>
+    <button onclick="history.back()" id="button"></button>
+  </div>
+
+  <script>
+    const pathLang = window.location.pathname.split("/")[1];
+
+    const messages = {
+      fa: {
+        title: "پرداخت با موفقیت انجام شد",
+        desc: "از خرید شما سپاسگزاریم.",
+        button: "بازگشت"
+      },
+      pt: {
+        title: "Pagamento bem-sucedido",
+        desc: "Obrigado pela sua compra.",
+        button: "Voltar"
+      },
+      eng: {
+        title: "Payment Successful",
+        desc: "Thank you for your purchase.",
+        button: "Go back"
+      },
+      fr: {
+        title: "Paiement réussi",
+        desc: "Merci pour votre achat.",
+        button: "Retour"
+      }
+    };
+
+    const msg = messages[pathLang] || messages.eng;
+
+    document.getElementById("title").textContent = msg.title;
+    document.getElementById("desc").textContent = msg.desc;
+    document.getElementById("button").textContent = msg.button;
+  </script>
+</body>
+</html>
+
