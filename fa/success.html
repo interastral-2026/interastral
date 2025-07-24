@@ -148,10 +148,15 @@
   <div class="card">
     <h1 id="title"></h1>
     <h2 id="desc"></h2>
-    <button onclick="history.back()" id="button"></button>
+    <button id="button"></button>
+
   </div>
 
   <script>
+    document.getElementById("button").addEventListener("click", () => {
+  window.location.href = `/${pathLang}/index.html`;
+});
+
     const pathLang = window.location.pathname.split("/")[1];
 
     const messages = {
