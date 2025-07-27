@@ -1,0 +1,117 @@
+/* Import فونت وزیر */
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Vazir', Tahoma, sans-serif;
+  background: linear-gradient(135deg, #1e1f28, #3c1361);
+  color: #f0e6fa;
+  margin: 0;
+  padding: 40px 20px;
+  max-width: 900px;
+  line-height: 1.7;
+  direction: rtl;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 {
+  color: #d9b3ff;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 8px #a97fff;
+}
+
+h1 {
+  font-size: 2.8rem;
+  text-align: center;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.9rem;
+  text-align: right;
+  border-bottom: 2px solid #a97fff;
+  padding-bottom: 8px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 1.15rem;
+  color: #d0c1ffcc;
+  margin-bottom: 25px;
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: #d9b3ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #f3d1ff;
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0;
+}
+
+li {
+  background: #5c3fa6cc;
+  padding: 18px 25px;
+  border-radius: 15px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgb(90 50 160 / 0.5);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: default;
+}
+
+li:hover {
+  background: #7e63ffcc;
+  transform: translateY(-6px);
+}
+
+time {
+  font-size: 0.85rem;
+  color: #b59bffcc;
+  float: left;
+  margin-top: 6px;
+}
+
+/* ریسپانسیو موبایل */
+@media (max-width: 768px) {
+  body {
+    padding: 30px 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-top: 35px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  li {
+    padding: 14px 18px;
+    font-size: 1rem;
+  }
+}
