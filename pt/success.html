@@ -56,25 +56,17 @@
       box-shadow: 0 0 15px #c565eb;
     }
   </style>
-
-
-  </head>
-
+</head>
 <body>
-
   <div class="card">
     <h1 id="title"></h1>
     <h2 id="desc"></h2>
     <p id="magic"></p>
+    <p id="spamWarning"></p>
     <button id="button"></button>
-
   </div>
 
   <script>
-    document.getElementById("button").addEventListener("click", () => {
-  window.location.href = `/${pathLang}/index.html`;
-});
-
     const pathLang = window.location.pathname.split("/")[1];
 
     const messages = {
@@ -82,25 +74,29 @@
         title: "پرداخت با موفقیت انجام شد",
         desc: "از خرید شما سپاسگزاریم.",
         button: "بازگشت",
-        magic: "به‌زودی منتظر دریافت پاسخی جادویی از میان کهکشان‌ها باشید... ✨"
+        magic: "به‌زودی منتظر دریافت پاسخی جادویی از میان کهکشان‌ها باشید... ✨",
+        spam: "اگر ایمیل را در صندوق ورودی مشاهده نکردید، لطفاً پوشه Spam را بررسی کرده و گزینه «Not Spam» را بزنید."
       },
       pt: {
         title: "Pagamento bem-sucedido",
         desc: "Obrigado pela sua compra.",
         button: "Voltar",
-        magic: "Em breve, aguarde por uma resposta mágica vinda das estrelas... ✨"
+        magic: "Em breve, aguarde por uma resposta mágica vinda das estrelas... ✨",
+        spam: "Se não encontrar o e-mail na sua caixa de entrada, verifique a pasta de spam e clique em \"Não é spam\"."
       },
       eng: {
         title: "Payment Successful",
         desc: "Thank you for your purchase.",
         button: "Go back",
-        magic: "Soon, expect a magical response from across the stars... ✨"
+        magic: "Soon, expect a magical response from across the stars... ✨",
+        spam: "If you don't see the email in your inbox, please check your spam folder and click \"Not Spam\"."
       },
       fr: {
         title: "Paiement réussi",
         desc: "Merci pour votre achat.",
         button: "Retour",
-        magic: "Très bientôt, attendez-vous à une réponse magique venue des étoiles... ✨"
+        magic: "Très bientôt, attendez-vous à une réponse magique venue des étoiles... ✨",
+        spam: "Si vous ne trouvez pas l'e-mail dans votre boîte de réception, vérifiez le dossier Spam et cliquez sur « Pas indésirable »."
       }
     };
 
@@ -108,9 +104,13 @@
 
     document.getElementById("title").textContent = msg.title;
     document.getElementById("desc").textContent = msg.desc;
+    document.getElementById("magic").textContent = msg.magic;
+    document.getElementById("spamWarning").textContent = msg.spam;
     document.getElementById("button").textContent = msg.button;
-    document.getElementById("magic").textContent = msg.magic;   
+
+    document.getElementById("button").addEventListener("click", () => {
+      window.location.href = `/${pathLang}/index.html`;
+    });
   </script>
 </body>
 </html>
-
