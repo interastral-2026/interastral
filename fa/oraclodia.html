@@ -202,7 +202,7 @@
     <h1>اوراکل روز</h1>
 
     <!-- سوالات با زبان شاعرانه و جادویی -->
-    <input type="hidden" name="lang" value="fa">
+   
 
     <label for="first_name">نام واقعی‌تان چیست؟ همان نامی که با روح شما هم‌نواست.</label>
     <input type="text" id="first_name" name="first_name" required />
@@ -261,6 +261,8 @@
       e.preventDefault();
 
       const submission_id = generateUniqueId();
+      const pathSegments = window.location.pathname.split('/');
+      const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه
       const formData = {
         submission_id,
         first_name: document.getElementById('first_name').value,
