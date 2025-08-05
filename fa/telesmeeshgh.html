@@ -250,6 +250,9 @@
       event.preventDefault();
 
       const formData = {};
+      // 🆕 Get language from URL (/pt, /fa, /en, etc.)
+    plainForm.language = window.location.pathname.split("/")[1] || "pt";
+
       const inputs = this.querySelectorAll("input, textarea, select");
       inputs.forEach(input => {
         formData[input.name] = input.value;
