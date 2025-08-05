@@ -202,6 +202,7 @@
     <h1>اوراکل روز</h1>
 
     <!-- سوالات با زبان شاعرانه و جادویی -->
+    <input type="hidden" name="lang" value="fa">
 
     <label for="first_name">نام واقعی‌تان چیست؟ همان نامی که با روح شما هم‌نواست.</label>
     <input type="text" id="first_name" name="first_name" required />
@@ -272,7 +273,8 @@
         emotion: document.getElementById('emotion').value,
         desire_today: document.getElementById('desire_today').value,
         important_thought: document.getElementById('important_thought').value,
-        email: document.getElementById('email').value
+        email: document.getElementById('email').value,
+        lang: document.getElementById('lang').value
       };
 
       const paymentTab = window.open('', '_blank');
