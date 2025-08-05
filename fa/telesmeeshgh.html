@@ -250,8 +250,10 @@
       event.preventDefault();
 
       const formData = {};
-      // 🆕 Get language from URL (/pt, /fa, /en, etc.)
-    plainForm.language = window.location.pathname.split("/")[1] || "pt";
+      const pathSegments = window.location.pathname.split('/');
+  const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
+
+  formData.lang = lang; // اضافه کردن به داده‌ها
 
       const inputs = this.querySelectorAll("input, textarea, select");
       inputs.forEach(input => {
