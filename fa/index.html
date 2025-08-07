@@ -621,5 +621,42 @@
     }
     setInterval(createMeteor, 900);
   </script>
+
+
+
+<!-- داخل <head> -->
+  <style>
+    .counter-box {
+      background: #1e1e3f;
+      border-radius: 15px;
+      padding: 30px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      margin-top: 50px;
+      color: #fff;
+      font-family: sans-serif;
+    }
+    .counter-box span {
+      font-size: 48px;
+      color: #ffcc00;
+      font-weight: bold;
+    }
+  </style>
+
+
+<!-- قبل از بسته شدن </body> -->
+<script>
+  fetch("https://script.google.com/macros/s/AKfycbyRMYGN3aWMJCa5pY3uBU72kJiXd2aRrYr1cX-aeSchgE1M_TtxM8tCdMfMoyiP8coY/exec")
+    .then(response => response.text())
+    .then(count => {
+      document.getElementById("visitCount").textContent = count;
+    })
+    .catch(err => {
+      console.error("خطا در دریافت بازدید:", err);
+      document.getElementById("visitCount").textContent = "خطا!";
+    });
+</script>
+
 </body>
 </html>
