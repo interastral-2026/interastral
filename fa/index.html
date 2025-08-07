@@ -347,6 +347,7 @@
 <body>
    
   <div class="header">
+    
     <div class="center-logo">
       <img src="https://i.imgur.com/yQHwOY1.gif" alt="لوگو">
     </div>
@@ -356,6 +357,7 @@
 
 
 <!-- popup link -->
+ 
 <!-- popup link -->
 <div id="formPopup" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); display:none; justify-content:center; align-items:center; z-index:9999; direction:rtl;">
   <div style="
@@ -575,6 +577,9 @@
     " onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 0 30px #f7d560';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px #f7d560';">
        حمایت مالی ❤️
     </a>
+   
+
+
     <p style="margin-top: 15px; font-size: 14px; color: #ccc;">
       
     </p>
@@ -583,6 +588,18 @@
       <a href="contacto.html">تماس با ما</a> • 
       <a href="puzzle.html">پازل</a>
     </div>
+
+
+
+
+     <!-- بخش نمایش شمارنده -->
+<div class="counter-box">
+  <h1>تعداد بازدید سایت:</h1>
+  <span id="visitCount">...</span>
+</div>
+
+
+
     <hr class="footer-hr" />
     <p style="margin-top: 15px; font-size: 14px; color: #cccccca7;">© ۲۰۲۵ InterAstral. کلیه حقوق محفوظ است.</p>
     <img src="https://i.imgur.com/xBK7p6T.jpeg" alt="لوگوی InterAstral" class="footer-logo" />
@@ -627,28 +644,23 @@
 <!-- داخل <head> -->
   <style>
     .counter-box {
-      background: #1e1e3f;
+      background: radial-gradient(circle at center, #0b0033 0%, #000 100%);
       border-radius: 15px;
-      padding: 30px;
+      padding: 25px;
       display: inline-block;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
       text-align: center;
-      margin-top: 50px;
+      margin-top: 5px;
       color: #fff;
       font-family: sans-serif;
+      font-size: 5px;
     }
     .counter-box span {
-      font-size: 48px;
+      font-size: 20px;
       color: #ffcc00;
       font-weight: bold;
     }
   </style>
-<!-- بخش نمایش شمارنده -->
-<div class="counter-box">
-  <h1>تعداد بازدیدهای سایت:</h1>
-  <span id="visitCount">...</span>
-</div>
-
 
 <!-- قبل از بسته شدن </body> -->
 <script>

@@ -464,6 +464,18 @@
         <a href="contacto.html">Contato</a> • 
         <a href="puzzle.html">Puzzle</a>
       </div>
+
+
+
+     <!-- بخش نمایش شمارنده -->
+<div class="counter-box">
+  <h1>Número de visitas ao site:</h1>
+  <span id="visitCount">...</span>
+</div>
+
+
+
+
       <hr class="footer-hr" />
       <p style="margin-top: 15px; font-size: 14px; color: #cccccca7;">© 2025 InterAstral. Todos os direitos reservados.</p>
       <img src="https://i.imgur.com/xBK7p6T.jpeg" alt="InterAstral Logo" class="footer-logo" />
@@ -632,5 +644,46 @@ function shareLink(link) {
   </script>
 
   
+
+
+
+
+<!-- داخل <head> -->
+  <style>
+    .counter-box {
+      background: radial-gradient(circle at center, #0b0033 0%, #000 100%);
+      border-radius: 15px;
+      padding: 25px;
+      display: inline-block;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      text-align: center;
+      margin-top: 5px;
+      color: #fff;
+      font-family: sans-serif;
+      font-size: 5px;
+    }
+    .counter-box span {
+      font-size: 20px;
+      color: #ffcc00;
+      font-weight: bold;
+    }
+  </style>
+
+<!-- قبل از بسته شدن </body> -->
+<script>
+  fetch("https://script.google.com/macros/s/AKfycbyRMYGN3aWMJCa5pY3uBU72kJiXd2aRrYr1cX-aeSchgE1M_TtxM8tCdMfMoyiP8coY/exec")
+    .then(response => response.text())
+    .then(count => {
+      document.getElementById("visitCount").textContent = count;
+    })
+    .catch(err => {
+      console.error("خطا در دریافت بازدید:", err);
+      document.getElementById("visitCount").textContent = "خطا!";
+    });
+</script>
+
+
+
+
 </body> 
 </html>
