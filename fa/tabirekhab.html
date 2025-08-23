@@ -206,8 +206,9 @@
       event.preventDefault();
       const formData = {};
       const pathSegments = window.location.pathname.split('/');
+      const submission_id = generateUniqueId();
   const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
-
+  formData.submission_id = submission_id;
   formData.lang = lang; // اضافه کردن به داده‌ها
       const inputs = this.querySelectorAll("input, select, textarea");
       inputs.forEach(input => {
