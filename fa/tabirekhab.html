@@ -199,6 +199,7 @@
     <input type="email" name="email" required>
 
     <button type="submit">دریافت تعبیر 🌙</button>
+    <button type="submitt">دریافت تعبیر 🌙 zarinpal</button>
   </form>
 
   <script>
@@ -243,5 +244,49 @@ formData.submission_id = submissionId;
       }
     });
   </script>
+   <script>
+    document.getElementById("dreamForm").addEventListener("submitt", async function(event) {
+      event.preventDefault();
+      const formData = {};
+      const pathSegments = window.location.pathname.split('/');
+
+  const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
+
+  formData.lang = lang; // اضافه کردن به داده‌ها
+  // ایجاد شناسه یکتا برای هر ارسال
+const submissionId = 'SUB-' + Date.now() + '-' + Math.floor(Math.random() * 100000);
+formData.submission_id = submissionId;
+
+      const inputs = this.querySelectorAll("input, select, textarea");
+      inputs.forEach(input => {
+        formData[input.name] = input.value;
+      });
+
+      const paymentTab = window.open('', '_blank');
+
+      try {
+        const response = await fetch("https://hook.eu2.make.com/o5ae8d97odvl0qz8d4gscfyrrxnxbb3z", {
+          method: "POST",
+          body: JSON.stringify(formData),
+          headers: { "Content-Type": "application/json" }
+        });
+
+        const data = await response.json();
+
+        if (data.payment_url) {
+          paymentTab.location.href = data.payment_url;
+        } else {
+          paymentTab.close();
+          alert("خطا در شروع پرداخت.");
+        }
+      } catch (error) {
+        paymentTab.close();
+        alert("خطا در ارتباط با سرور.");
+        console.error(error);
+      }
+    });
+  </script>
 </body>
 </html>
+
+
