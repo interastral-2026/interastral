@@ -206,10 +206,14 @@
       event.preventDefault();
       const formData = {};
       const pathSegments = window.location.pathname.split('/');
-      
+
   const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
 
   formData.lang = lang; // اضافه کردن به داده‌ها
+  // ایجاد شناسه یکتا برای هر ارسال
+const submissionId = 'SUB-' + Date.now() + '-' + Math.floor(Math.random() * 100000);
+formData.submission_id = submissionId;
+
       const inputs = this.querySelectorAll("input, select, textarea");
       inputs.forEach(input => {
         formData[input.name] = input.value;
