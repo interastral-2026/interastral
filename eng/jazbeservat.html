@@ -183,9 +183,9 @@
         <a href="servisos.html" style="color:#fcd34d; margin: 0 15px; font-weight:bold; text-decoration:none;">back</a>
       </nav>
     </header>
-  
+   
     <h1>✨ Creation of the Magical Wealth Symbol ✨</h1>
-  
+    
     <form id="talismForm">
       
       <label> Full name:</label>
@@ -224,13 +224,84 @@
   
       <label>📧 Your email to receive your magical abundance symbol:</label>
       <input type="email" name="email" required>
-      <label for="promo">🎁 Promo Code (if you have one):</label>
-      <input type="text" id="promo" name="promo" placeholder="e.g. VIP_1234">
-      <button type="submit">🔓 Awaken my Abundance Energy 💰</button>
+    
+      
+          
+<input type="hidden" name="form_name" value=" talismForm eng" />
+
+
+<button type="button" id="continueBtn">continue</button>
+
+
+<!-- بخش نهایی (در ابتدا مخفی) -->
+<div id="paymentSection" style="display: none; margin-top: 20px;">
+<h2>The Hidden Secrets of Your Cup Are About to Be Revealed! 🔮</h2>
+<p>
+  Your cup is full of mysterious signs and symbols.<br>
+With a careful glance, you can uncover the secrets of your path and experience a magical and exciting journey.
+You are just one small step away from discovering the magical messages and hidden mysteries… Are you ready?
+</p>
+
+<button type="submit" id="btnDefault">Pay in Euros (8.99€)</button>
+
+</div>
     </form>
+  
+
+    <script>
+
+
+      document.getElementById('continueBtn').addEventListener('click', async function() {
+        const form = document.getElementById('talismForm');
+        const elements = [...form.querySelectorAll('input, select, textarea')];
+      
+        for (let el of elements) {
+          if (el.type === "hidden") continue; // فیلدهای hidden نادیده گرفته شوند
+      
+          // بررسی اگر فیلد الزامی باشد یا می‌خواهید همه فیلدها را چک کنید
+          if (el.value.trim() === "") {
+            let label = el.name;
+            const labelEl = form.querySelector(`label[for='${el.id}']`);
+            if (labelEl) label = labelEl.innerText;
+            alert(`لطفاً فیلد "${label}" را تکمیل کنید.`);
+            el.focus();
+            return; // جلوگیری از ادامه
+          }
+        }
+      
+        // جمع‌آوری داده‌های فرم
+        const formData = new FormData(form);
+        const data = {};
+        formData.forEach((value, key) => { data[key] = value });
+        
+          
+          
+            // ارسال به Webhook (برای ذخیره در Google Sheet)
+            try {
+              await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+              });
+            } catch (error) {
+              console.error('خطا در ارسال به وب‌هوک:', error);
+            }
+          
+          
+          
+            // مخفی کردن همه فیلدهای فرم
+            const formElements = document.querySelectorAll('#talismForm > label, #talismForm > input, #talismForm > select, #talismForm > textarea, #continueBtn');
+            formElements.forEach(el => el.style.display = 'none');
+          
+            // نمایش بخش پرداخت
+            document.getElementById('paymentSection').style.display = 'block';
+          });
+          </script>
   
     
   <script>
+
+    
     document.getElementById("talismForm").addEventListener("submit", async function(event) {
       event.preventDefault();
 
