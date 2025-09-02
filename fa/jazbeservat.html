@@ -62,7 +62,18 @@
       color: #fcd34d;
       position: relative;
       font-family: 'Tahoma', sans-serif;
+      margin: 40px;
+      margin-top: 20px
     }
+    h2 {
+      text-align: center;
+      color: #fcd34d;
+      position: relative;
+      font-family: 'Tahoma', sans-serif;
+      margin: 20px;
+      margin-top: 20px
+    }
+
 
     label {
       display: block;
@@ -181,7 +192,7 @@
   <form id="talismForm">
     <input type="hidden" name="lang" value="fa">
     <label>نام کامل:</label>
-    <input type="text" name="nome" required>
+    <input type="text" id="name" name="nome" required>
 
     <label>تاریخ تولد:</label>
     <input type="date" name="data_nascimento" required>
@@ -215,13 +226,61 @@
     <textarea name="energia_desejada"></textarea>
 
     <label>📧 ایمیل شما برای دریافت نماد جادویی ثروت:</label>
-    <input type="email" name="email" required>
-
-    <button type="submit" id="btnTalismDefault">🔓 فعال‌سازی انرژی فراوانی من 💰</button>
-    <button type="submit" id="btnTalismOther">⚡ فعال‌سازی ویژه با زرین‌پال</button>
+    <input type="email" id="email" name="email" required>
+    <input type="hidden" name="form_name" value="فال talismFormfa" />
+    <button type="button" id="continueBtn">ادامه</button>
+  
+  
+    <!-- بخش نهایی (در ابتدا مخفی) -->
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>پاسخ جادویی شما آماده است! ✨</h2>
+      <p>
+        ما نشانه‌های مهمی از مسیر شما دریافت کردیم.<br>
+        با پرداخت هزینه، این رازها را دریافت کنید و سفر خود را آغاز کنید.
+      </p>
+      <button type="submit" id="btnTalismDefault">پرداخت ارزی (5,99€)</button>
+      <button type="submit" id="btnTalismOther">پرداخت ریالی (۴۵۰٬۰۰۰ تومان)</button>
+    </div>
     
   </form>
+  <script>
 
+
+    document.getElementById('continueBtn').addEventListener('click', async function() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+    
+      if (!name || !email) {
+        alert('لطفاً نام و ایمیل خود را وارد کنید.');
+        return;
+      }
+    
+      // جمع‌آوری داده‌های فرم
+      const formData = new FormData(document.getElementById('talismForm'));
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value });
+    
+      // ارسال به Webhook (برای ذخیره در Google Sheet)
+      try {
+        await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('خطا در ارسال به وب‌هوک:', error);
+      }
+    
+    
+    
+      // مخفی کردن همه فیلدهای فرم
+      const formElements = document.querySelectorAll('#talismForm > label, #talismForm > input, #talismForm > select, #talismForm > textarea, #continueBtn');
+      formElements.forEach(el => el.style.display = 'none');
+    
+      // نمایش بخش پرداخت
+      document.getElementById('paymentSection').style.display = 'block';
+    });
+    </script>
    
   <script>
     function generateUniqueId() {
@@ -229,58 +288,53 @@
     }
   
     document.getElementById("talismForm").addEventListener("submit", async function(event) {
-      event.preventDefault();
-  
-      const clickedButton = event.submitter; // دکمه‌ای که کلیک شده
-      let webhookUrl = "";
-  
-      if (clickedButton.id === "btnTalismDefault") {
-        webhookUrl = "https://hook.eu2.make.com/v4qy43jd0z6igcu4ankq445b5lp7opmd";
-      } else if (clickedButton.id === "btnTalismOther") {
-        webhookUrl = "https://hook.eu2.make.com/6jq7rbquzuy3bza5ic0t9rwqcww0rjxh";
-      } else {
-        alert("دکمه نامعتبر!");
-        return;
-      }
-  
-      const form = event.target;
-      const submissionId = generateUniqueId();
-  
-      const formData = { submission_id: submissionId };
-      const pathSegments = window.location.pathname.split('/');
-      formData.lang = pathSegments[1] || 'pt';
-  
-      [...form.elements].forEach(el => {
-        if (el.name) formData[el.name] = el.value;
-      });
-  
-      const paymentTab = window.open('', '_blank');
-  
-      try {
-        const response = await fetch(webhookUrl, {
-          method: "POST",
-          body: JSON.stringify(formData),
-          headers: { "Content-Type": "application/json" }
-        });
-  
-        if (!response.ok) throw new Error("خطا در درخواست");
-  
-        const data = await response.json();
-  
-        if (data.payment_url) {
-          paymentTab.location.href = data.payment_url;
-        } else if (data.message) {
-          paymentTab.document.write(`<pre>${data.message}</pre>`);
-          paymentTab.document.title = "نتیجه انرژی طلسم";
-        } else {
-          paymentTab.document.write("<pre>جواب دریافت شد، اما فرمت غیرمنتظره است.</pre>");
-          paymentTab.document.title = "نتیجه انرژی طلسم";
-        }
-      } catch (error) {
-        paymentTab.close();
-        alert("خطا در ارسال فرم: " + error.message);
-      }
+  event.preventDefault();
+
+  const clickedButton = event.submitter;
+  if (!clickedButton) {
+    alert("لطفاً یکی از دکمه‌های پرداخت را انتخاب کنید.");
+    return;
+  }
+
+  let webhookUrl = "";
+  if (clickedButton.id === "btnTalismDefault") {
+    webhookUrl = "https://hook.eu2.make.com/v4qy43jd0z6igcu4ankq445b5lp7opmd";
+  } else if (clickedButton.id === "btnTalismOther") {
+    webhookUrl = "https://hook.eu2.make.com/6jq7rbquzuy3bza5ic0t9rwqcww0rjxh";
+  } else {
+    alert("دکمه نامعتبر!");
+    return;
+  }
+
+  const form = event.target;
+  const submissionId = 'SUB-' + Date.now() + '-' + Math.floor(Math.random() * 100000);
+  const formData = { submission_id: submissionId };
+
+  [...form.elements].forEach(el => {
+    if (el.name) formData[el.name] = el.value;
+  });
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" }
     });
+
+    if (!response.ok) throw new Error("خطا در ارسال اطلاعات");
+
+    const data = await response.json();
+    if (data.payment_url) {
+      // باز کردن پنجره فقط بعد از دریافت payment_url
+      window.open(data.payment_url, '_blank');
+    } else {
+      alert("پرداخت قابل دسترسی نیست.");
+    }
+  } catch (error) {
+    alert("خطا در ارسال فرم: " + error.message);
+  }
+});
+
   </script>
   
 </body>

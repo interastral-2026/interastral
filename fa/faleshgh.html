@@ -35,17 +35,24 @@
       display: block;
       font-weight: bold;
       font-size: 14px;
-      color: #680939;
+      color: #f9eff4;
       text-align: right;
+      text-shadow: 0 0 10px #a00050;
     }
     h2 {
       font-size: 1.2em;
       text-align: center;
-      color: #ea338e;
+      color: #f7afd3;
       margin-bottom: 25px;
-      text-shadow: 0 0 10px #f5afd2;
+      text-shadow: 0 0 10px #54012b;
     }
-
+    p {
+      font-size: 1.2em;
+      text-align: center;
+      color: #e4d5dc;
+      margin-bottom: 25px;
+      text-shadow: 0 0 10px #e52384;
+    }
     input, select, textarea, button {
       width: 100%;
       padding: 10px;
@@ -156,7 +163,7 @@
     <form id="loveForm">
       <input type="hidden" name="lang" value="fa">
       <label>نام شما:</label>
-      <input type="text" name="your_name" required>
+      <input id="name" name="name" required>
 
       <label>تاریخ تولد شما:</label>
       <input type="date" name="your_dob" required>
@@ -187,14 +194,63 @@
       <textarea name="big_question" rows="3" required></textarea>
 
       <label>ایمیل شما برای دریافت فال:</label>
-      <input type="email" name="email" required>
+      <input type="email" id="email" name="email" required>
+      <input type="hidden" name="form_name" value="فال love" />
 
-      <button type="submit" id="btnLoveDefault">دریافت فال 💖</button>
-      <button type="submit" id="btnLoveZarinpal">دریافت فال Zarinpal</button>
-      
-    </form>
-  </div>
+
+      <button type="button" id="continueBtn">ادامه</button>
   
+  
+    <!-- بخش نهایی (در ابتدا مخفی) -->
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>پاسخ جادویی شما آماده است! ✨</h2>
+      <p>
+        ما نشانه‌های مهمی از مسیر شما دریافت کردیم.<br>
+        با پرداخت هزینه، این رازها را دریافت کنید و سفر خود را آغاز کنید.
+      </p>
+      <button type="submit" id="btnDefault">پرداخت ارزی (5,99€)</button>
+      <button type="submit" id="btnZarinpal">پرداخت ریالی (۴۵۰٬۰۰۰ تومان)</button>
+    </div>
+  </form>
+  </div>
+  <script>
+
+
+    document.getElementById('continueBtn').addEventListener('click', async function() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+    
+      if (!name || !email) {
+        alert('لطفاً نام و ایمیل خود را وارد کنید.');
+        return;
+      }
+    
+      // جمع‌آوری داده‌های فرم
+      const formData = new FormData(document.getElementById('loveForm'));
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value });
+    
+      // ارسال به Webhook (برای ذخیره در Google Sheet)
+      try {
+        await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('خطا در ارسال به وب‌هوک:', error);
+      }
+    
+    
+    
+      // مخفی کردن همه فیلدهای فرم
+      const formElements = document.querySelectorAll('#loveForm > label, #loveForm > input, #loveForm > select, #loveForm > textarea, #continueBtn');
+      formElements.forEach(el => el.style.display = 'none');
+    
+      // نمایش بخش پرداخت
+      document.getElementById('paymentSection').style.display = 'block';
+    });
+    </script>
   <script>
     document.getElementById("loveForm").addEventListener("submit", async function(event) {
       event.preventDefault();
