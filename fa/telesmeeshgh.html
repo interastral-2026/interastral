@@ -264,19 +264,30 @@
   <script>
 
 
-    document.getElementById('continueBtn').addEventListener('click', async function() {
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
+document.getElementById('continueBtn').addEventListener('click', async function() {
+  const form = document.getElementById('lostLoveForm');
+  const elements = [...form.querySelectorAll('input, select, textarea')];
+
+  for (let el of elements) {
+    if (el.type === "hidden") continue; // فیلدهای hidden نادیده گرفته شوند
+
+    // بررسی اگر فیلد الزامی باشد یا می‌خواهید همه فیلدها را چک کنید
+    if (el.value.trim() === "") {
+      let label = el.name;
+      const labelEl = form.querySelector(`label[for='${el.id}']`);
+      if (labelEl) label = labelEl.innerText;
+      alert(`لطفاً فیلد "${label}" را تکمیل کنید.`);
+      el.focus();
+      return; // جلوگیری از ادامه
+    }
+  }
+
+  // جمع‌آوری داده‌های فرم
+  const formData = new FormData(form);
+  const data = {};
+  formData.forEach((value, key) => { data[key] = value });
+  
     
-      if (!name || !email) {
-        alert('لطفاً نام و ایمیل خود را وارد کنید.');
-        return;
-      }
-    
-      // جمع‌آوری داده‌های فرم
-      const formData = new FormData(document.getElementById('lostLoveForm'));
-      const data = {};
-      formData.forEach((value, key) => { data[key] = value });
     
       // ارسال به Webhook (برای ذخیره در Google Sheet)
       try {
