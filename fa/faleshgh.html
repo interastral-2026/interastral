@@ -201,7 +201,7 @@
       // تولید Submission ID
     const submissionId = 'SUB-' + Date.now() + '-' + Math.floor(Math.random() * 100000);
     formData.submission_id = submissionId;
-    
+
       const pathSegments = window.location.pathname.split('/');
   const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
 
@@ -214,7 +214,7 @@
       const paymentTab = window.open('', '_blank');
 
       try {
-        const response = await fetch("https://hook.eu2.make.com/haw6jkl1m8am8w0orgurag3oag7ui8yj", {
+        const response = await fetch("https://hook.eu2.make.com/wm9y6yl4rnhaamy7sjy1bxga3dlbqo6w", {
           method: "POST",
           body: JSON.stringify(formData),
           headers: { "Content-Type": "application/json" }
