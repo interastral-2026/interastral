@@ -198,6 +198,10 @@
       event.preventDefault();
 
       const formData = {};
+      // تولید Submission ID
+    const submissionId = 'SUB-' + Date.now() + '-' + Math.floor(Math.random() * 100000);
+    formData.submission_id = submissionId;
+    
       const pathSegments = window.location.pathname.split('/');
   const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود
 
