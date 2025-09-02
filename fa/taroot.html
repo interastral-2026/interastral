@@ -200,8 +200,9 @@
     <label for="email">ایمیل شما برای دریافت فال:</label>
     <input type="email" id="email" name="email" required />
 
-    <button type="submit" id="btnDefault">ارسال و دریافت خوانش</button>
-    <button type="submit" id="btnZarinpal">ارسال و دریافت خوانش zarinpal</button>
+    <button type="submit" id="btnTarotDefault">دریافت فال اصلی 🔮</button>
+<button type="submit" id="btnTarotOther">دریافت فال ویژه با زرین‌پال 💳</button>
+
   </form>
 
   <script>
@@ -209,15 +210,15 @@
       return 'id-' + Math.random().toString(36).substr(2, 9);
     }
   
-    document.getElementById('cafeForm').addEventListener('submit', async function(e) {
+    document.getElementById('tarotForm').addEventListener('submit', async function(e) {
       e.preventDefault();
   
-      const clickedButton = e.submitter; // دکمه‌ای که کلیک شد
+      const clickedButton = e.submitter; // دکمه‌ای که زده شد
       let webhookUrl = "";
   
-      if (clickedButton.id === "btnDefault") {
+      if (clickedButton.id === "btnTarotDefault") {
         webhookUrl = "https://hook.eu2.make.com/mtaocgp9oyh8ihm1k55a4yy5h600rk9l";
-      } else if (clickedButton.id === "btnZarinpal") {
+      } else if (clickedButton.id === "btnTarotOther") {
         webhookUrl = "https://hook.eu2.make.com/x048z9xou1q1dpxgl7yamv1rtsx6z15x";
       } else {
         alert("دکمه نامعتبر!");
@@ -230,15 +231,15 @@
   
       const formData = {
         submission_id,
-        name: document.getElementById('name').value,
-        emotion: document.getElementById('emotion').value,
-        question: document.getElementById('question').value,
-        life_area: document.getElementById('life_area').value,
-        open_advice: document.getElementById('open_advice').value,
+        first_name: document.getElementById('first_name').value,
+        focus: document.getElementById('focus').value,
+        situation: document.getElementById('situation').value,
+        feeling: document.getElementById('feeling').value,
         email: document.getElementById('email').value,
         birth_date: document.getElementById('birth_date').value,
         birth_place: document.getElementById('birth_place').value,
         birth_time: document.getElementById('birth_time').value,
+        gender: document.getElementById('gender').value,
         occupation: document.getElementById('occupation').value,
         lang: lang,
       };
@@ -258,11 +259,11 @@
           paymentTab.location.href = data.payment_url;
         } else {
           paymentTab.close();
-          alert("خطا در شروع پرداخت. لطفاً دوباره تلاش کنید.");
+          alert("خطا در آغاز پرداخت. لطفاً دوباره تلاش کنید.");
         }
       } catch (error) {
         paymentTab.close();
-        alert("خطا در ارتباط با سرور.");
+        alert("خطا در ارتباط با سرور: " + error.message);
         console.error(error);
       }
     });
