@@ -221,15 +221,19 @@
 
 <script>
 
-
-  document.getElementById('continueBtn').addEventListener('click', async function() {
-    const name = document.getElementById('first_name').value.trim();
-    const email = document.getElementById('email').value.trim();
+document.getElementById('continueBtn').addEventListener('click', async function() {
+  const form = document.getElementById('talismForm');
+  const elements = [...form.elements].filter(el => el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT");
   
-    if (!name || !email) {
-      alert('لطفاً نام و ایمیل خود را وارد کنید.');
+  // بررسی تمام فیلدهای الزامی (required)
+  for (let el of elements) {
+    if (el.hasAttribute('required') && !el.value.trim()) {
+      alert(`لطفاً فیلد "${el.previousElementSibling.innerText}" را تکمیل کنید.`);
+      el.focus();
       return;
     }
+  }
+
   
     // جمع‌آوری داده‌های فرم
     const formData = new FormData(document.getElementById('tarotForm'));
