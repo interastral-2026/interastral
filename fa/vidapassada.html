@@ -187,12 +187,64 @@
 
       <label for="email">ایمیل شما برای دریافت راز اینتر آسترال✨</label>
       <input type="email" id="email" name="email" placeholder="مثال: example@magia.com" required>
+      <input type="hidden" name="form_name" value=" pastLifeForm" />
 
-      <button type="submit" id="btnPastLifeDefault">دریافت داستان زندگی گذشته 🔮</button>
-      <button type="submit" id="btnPastLifeOther">دریافت ویژه با زرین‌پال 💳</button>
-      
-    </form>
+
+      <button type="button" id="continueBtn">ادامه</button>
+  
+  
+    <!-- بخش نهایی (در ابتدا مخفی) -->
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>پاسخ جادویی شما آماده است! ✨</h2>
+      <p>
+        ما نشانه‌های مهمی از مسیر شما دریافت کردیم.<br>
+        با پرداخت هزینه، این رازها را دریافت کنید و سفر خود را آغاز کنید.
+      </p>
+      <button type="submit" id="btnPastLifeDefault">پرداخت ارزی (۱۰٫۹۹€)</button>
+      <button type="submit" id="btnPastLifeOther">پرداخت ریالی (۱۱۵٬۰۰۰ تومان)</button>
+    </div>
+  </form>
+
   </div>
+  <script>
+
+
+    document.getElementById('continueBtn').addEventListener('click', async function() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+    
+      if (!name || !email) {
+        alert('لطفاً نام و ایمیل خود را وارد کنید.');
+        return;
+      }
+    
+      // جمع‌آوری داده‌های فرم
+      const formData = new FormData(document.getElementById('pastLifeForm'));
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value });
+    
+      // ارسال به Webhook (برای ذخیره در Google Sheet)
+      try {
+        await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('خطا در ارسال به وب‌هوک:', error);
+      }
+    
+    
+    
+      // مخفی کردن همه فیلدهای فرم
+      const formElements = document.querySelectorAll('#pastLifeForm > label, #pastLifeForm > input, #pastLifeForm > select, #pastLifeForm > textarea, #continueBtn');
+      formElements.forEach(el => el.style.display = 'none');
+    
+      // نمایش بخش پرداخت
+      document.getElementById('paymentSection').style.display = 'block';
+    });
+    </script>
+
 
   <script>
     document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {
