@@ -259,7 +259,10 @@
 
     document.getElementById('reflectionForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-
+      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
+  
       const submission_id = generateUniqueId();
       const pathSegments = window.location.pathname.split('/');
       const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه

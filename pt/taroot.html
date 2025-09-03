@@ -222,6 +222,8 @@
 
 <script>
   document.getElementById('continueBtn').addEventListener('click', async function() {
+   
+
     const form = document.getElementById('tarotForm');
     const elements = [...form.querySelectorAll('input, select, textarea')];
   
@@ -274,6 +276,9 @@
 
     document.getElementById('tarotForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+      const clickedButton = e.submitter; // O botão que foi clicado
+clickedButton.disabled = true;     // Desativar o botão
+clickedButton.innerText = "Processando..."; // Alterar o texto para informar o usuário
       const pathSegments = window.location.pathname.split('/');
       const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه
       const submission_id = generateUniqueId();

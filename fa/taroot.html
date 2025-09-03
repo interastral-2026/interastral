@@ -275,7 +275,10 @@ document.getElementById('continueBtn').addEventListener('click', async function(
     document.getElementById('tarotForm').addEventListener('submit', async function(e) {
       e.preventDefault();
   
-      const clickedButton = e.submitter; // دکمه‌ای که زده شد
+      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
+  
       let webhookUrl = "";
   
       if (clickedButton.id === "btnTarotDefault") {

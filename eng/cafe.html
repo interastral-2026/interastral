@@ -241,7 +241,7 @@
 <input type="hidden" name="form_name" value=" cafeForm eng" />
 
 
-    <button type="button" id="continueBtn">ادامه</button>
+    <button type="button" id="continueBtn">continue</button>
 
 
   <!-- بخش نهایی (در ابتدا مخفی) -->
@@ -283,6 +283,7 @@
           if (input.name) formData[input.name] = input.value;
       });
   
+      
       // Send data to webhook
       try {
           await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
@@ -330,6 +331,9 @@ document.getElementById('continueBtn').addEventListener('click', function() {
   
       document.getElementById('cafeForm').addEventListener('submit', async function(e) {
         e.preventDefault();
+        const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "Processing..."; // تغییر متن برای اطلاع کاربر
         const pathSegments = window.location.pathname.split('/');
 const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه
 

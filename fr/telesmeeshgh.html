@@ -311,6 +311,9 @@
 <script>
   document.getElementById("lostLoveForm").addEventListener("submit", async function(event) {
     event.preventDefault();
+    const clickedButton = e.submitter; // Le bouton qui a été cliqué
+clickedButton.disabled = true;     // Désactiver le bouton
+clickedButton.innerText = "En cours de traitement..."; // Changer le texte pour informer l'utilisateur
 
     const formData = {};
     const pathSegments = window.location.pathname.split('/');

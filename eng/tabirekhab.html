@@ -213,6 +213,9 @@
     <script>
       document.getElementById("dreamForm").addEventListener("submit", async function(event) {
         event.preventDefault();
+        const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "Processing..."; // تغییر متن برای اطلاع کاربر
         const formData = {};
         const pathSegments = window.location.pathname.split('/');
   const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود

@@ -266,7 +266,10 @@ document.getElementById('continueBtn').addEventListener('click', async function(
     document.getElementById("loveForm").addEventListener("submit", async function(event) {
       event.preventDefault();
   
-      const clickedButton = event.submitter; // دکمه‌ای که زده شد
+      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
+  
       let webhookUrl = "";
   
       // تشخیص دکمه و تعیین وبهوک

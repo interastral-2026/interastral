@@ -300,8 +300,12 @@ document.getElementById('continueBtn').addEventListener('click', async function(
   
     document.getElementById("talismForm").addEventListener("submit", async function(event) {
   event.preventDefault();
-
-  const clickedButton = event.submitter;
+  const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
+  
+  
+  
   if (!clickedButton) {
     alert("لطفاً یکی از دکمه‌های پرداخت را انتخاب کنید.");
     return;

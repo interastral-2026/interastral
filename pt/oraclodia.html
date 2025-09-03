@@ -295,6 +295,9 @@
 
     document.getElementById('reflectionForm').addEventListener('submit', async function(e) {
       e.preventDefault();
+      const clickedButton = e.submitter; // O botão que foi clicado
+clickedButton.disabled = true;     // Desativar o botão
+clickedButton.innerText = "Processando..."; // Alterar o texto para informar o usuário
 
       const submission_id = generateUniqueId();
       const formData = {

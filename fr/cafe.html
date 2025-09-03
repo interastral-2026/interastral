@@ -314,7 +314,10 @@
   
       document.getElementById('cafeForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-  
+        const clickedButton = e.submitter; // Le bouton qui a été cliqué
+clickedButton.disabled = true;     // Désactiver le bouton
+clickedButton.innerText = "En cours de traitement..."; // Changer le texte pour informer l'utilisateur
+
         const submission_id = generateUniqueId();
         const pathSegments = window.location.pathname.split('/');
         const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه

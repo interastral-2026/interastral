@@ -314,8 +314,12 @@ document.getElementById('continueBtn').addEventListener('click', async function(
   <script>
     document.getElementById("lostLoveForm").addEventListener("submit", async function(event) {
       event.preventDefault();
+      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
   
-      const clickedButton = event.submitter; // دکمه‌ای که کلیک شده
+     
+  
       let webhookUrl = "";
   
       if (clickedButton.id === "btnLostLoveDefault") {

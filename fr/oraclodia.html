@@ -284,7 +284,10 @@
   
     document.getElementById('reflectionForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-  
+      const clickedButton = e.submitter; // Le bouton qui a été cliqué
+clickedButton.disabled = true;     // Désactiver le bouton
+clickedButton.innerText = "En cours de traitement..."; // Changer le texte pour informer l'utilisateur
+
       const submission_id = generateUniqueId();
       const formData = {
         submission_id,

@@ -185,7 +185,7 @@
         <input type="hidden" name="form_name" value=" pastLifeForm eng" />
 
 
-      <button type="button" id="continueBtn">ادامه</button>
+      <button type="button" id="continueBtn">continue</button>
   
   
     <!-- بخش نهایی (در ابتدا مخفی) -->
@@ -207,6 +207,7 @@
 <script>
 
   document.getElementById('continueBtn').addEventListener('click', async function() {
+     
     const form = document.getElementById('pastLifeForm');
     const elements = [...form.querySelectorAll('input, select, textarea')];
   
@@ -218,7 +219,7 @@
         let label = el.name;
         const labelEl = form.querySelector(`label[for='${el.id}']`);
         if (labelEl) label = labelEl.innerText;
-        alert(`لطفاً فیلد "${label}" را تکمیل کنید.`);
+        alert(`Please complete the "${label}" field.`);
         el.focus();
         return; // جلوگیری از ادامه
       }
@@ -256,7 +257,14 @@
   
     <script>
       document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {
+         
+ 
         e.preventDefault();
+        const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "Processing..."; // تغییر متن برای اطلاع کاربر
+
+  
         const form = e.target;
         const formData = new FormData(form);
          const photoFile = formData.get("photo");
@@ -302,6 +310,7 @@
             alert("Error uploading image: " + err.message);
             return;
           }
+          
         }
   
         // Convert form data entries to plain object

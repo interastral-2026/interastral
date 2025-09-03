@@ -240,7 +240,7 @@
       <input type="hidden" name="form_name" value=" lostLoveForm eng" />
 
 
-      <button type="button" id="continueBtn">ادامه</button>
+      <button type="button" id="continueBtn">continue</button>
   
   
     <!-- بخش نهایی (در ابتدا مخفی) -->
@@ -312,7 +312,10 @@ el.focus();
   <script>
     document.getElementById("lostLoveForm").addEventListener("submit", async function(event) {
       event.preventDefault();
-  
+      const clickedButton = e.submitter; // the button that was clicked
+clickedButton.disabled = true;     // disable the button
+clickedButton.innerText = "Processing..."; // change text to inform the user
+
       const formData = {};
       const pathSegments = window.location.pathname.split('/');
   const lang = pathSegments[1] || 'pt';  // pt پیش‌فرض اگر نبود

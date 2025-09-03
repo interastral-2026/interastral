@@ -295,7 +295,10 @@
     <script>
       document.getElementById("talismForm").addEventListener("submit", async function(event) {
         event.preventDefault();
-  
+        const clickedButton = e.submitter; // Le bouton qui a été cliqué
+clickedButton.disabled = true;     // Désactiver le bouton
+clickedButton.innerText = "En cours de traitement..."; // Changer le texte pour informer l'utilisateur
+
         const form = event.target;
         const formData = {};
         const pathSegments = window.location.pathname.split('/');

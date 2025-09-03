@@ -254,6 +254,9 @@
   <script>
     document.getElementById("loveForm").addEventListener("submit", async function(event) {
       event.preventDefault();
+      const clickedButton = e.submitter; // O botão que foi clicado
+clickedButton.disabled = true;     // Desativar o botão
+clickedButton.innerText = "Processando..."; // Alterar o texto para informar o usuário
 
       const formData = {};
       const inputs = this.querySelectorAll("input, select, textarea");

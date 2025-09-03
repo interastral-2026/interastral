@@ -261,8 +261,11 @@ document.getElementById('continueBtn').addEventListener('click', async function(
   <script>
     document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {
       e.preventDefault();
+     const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
   
-      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+     
       let webhookUrl = "";
   
       if (clickedButton.id === "btnPastLifeDefault") {
@@ -348,12 +351,14 @@ document.getElementById('continueBtn').addEventListener('click', async function(
           paymentTab.location.href = result.paymentUrl;
         } else {
           paymentTab.document.write("<pre>اطلاعات ارسال شد، اما لینک پرداخت دریافت نشد.</pre>");
+          clickedButton.disabled = false; // دوباره فعال کردن دکمه
           paymentTab.document.title = "نتیجه خوانش زندگی گذشته";
         }
   
       } catch (error) {
         paymentTab.close();
         alert("خطای اتصال. اینترنت خود را بررسی کنید.");
+        clickedButton.disabled = false; // دوباره فعال کردن دکمه
         console.error(error);
       }
     });

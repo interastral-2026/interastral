@@ -257,6 +257,10 @@
     <script>
       document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {
         e.preventDefault();
+        const clickedButton = e.submitter; // Le bouton qui a été cliqué
+clickedButton.disabled = true;     // Désactiver le bouton
+clickedButton.innerText = "En cours de traitement..."; // Changer le texte pour informer l'utilisateur
+
         const form = e.target;
         const formData = new FormData(form);
         const photoFile = formData.get("photo");

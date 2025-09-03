@@ -207,6 +207,8 @@
 
 <script>
   document.getElementById('continueBtn').addEventListener('click', async function() {
+   
+
     const form = document.getElementById('pastLifeForm');
     const elements = [...form.querySelectorAll('input, select, textarea')];
   
@@ -253,6 +255,9 @@
   <script>
     document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {
       e.preventDefault();
+      const clickedButton = e.submitter; // O botão que foi clicado
+clickedButton.disabled = true;     // Desativar o botão
+clickedButton.innerText = "Processando..."; // Alterar o texto para informar o usuário
       const form = e.target;
       const formData = new FormData(form);
      

@@ -248,6 +248,10 @@ formData.submission_id = submissionId;
    <script>
     document.getElementById("dreamForm").addEventListener("submitt", async function(event) {
       event.preventDefault();
+      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
+  
       const formData = {};
       const pathSegments = window.location.pathname.split('/');
 

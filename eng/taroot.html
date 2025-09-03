@@ -209,7 +209,7 @@
       <input type="hidden" name="form_name" value=" tarotForm" />
 
 
-      <button type="button" id="continueBtn">ادامه</button>
+      <button type="button" id="continueBtn">continue</button>
   
   
     <!-- بخش نهایی (در ابتدا مخفی) -->
@@ -285,7 +285,11 @@ el.focus();
       document.getElementById('tarotForm').addEventListener('submit', async function(e) {
         e.preventDefault();
     
-        const clickedButton = e.submitter; // دکمه‌ای که زده شد
+        const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "Processing..."; // تغییر متن برای اطلاع کاربر
+
+       
         let webhookUrl = "";
     
         if (clickedButton.id === "btnTarotDefault") {
