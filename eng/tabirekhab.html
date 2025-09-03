@@ -204,14 +204,13 @@
     
       <label>Your email to receive the interpretation:</label>
       <input type="email" name="email" required>
-      <label for="promo">🎁 Promo Code (if you have one):</label>
-      <input type="text" id="promo" name="promo" placeholder="e.g. VIP_1234">
+
     
       <button type="submit">Receive Interpretation 🌙</button>
     </form>
     
     <script>
-      document.getElementById("dreamForm").addEventListener("submit", async function(event) {
+      document.getElementById("dreamForm").addEventListener("submit", async function(e) {
         event.preventDefault();
         const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
   clickedButton.disabled = true;     // غیرفعال کردن دکمه

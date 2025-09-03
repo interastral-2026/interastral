@@ -305,8 +305,12 @@
 
 
   <script>
-    document.getElementById("lostLoveForm").addEventListener("submit", async function(event) {
-      event.preventDefault();
+    function generateUniqueId() {
+      return 'id-' + Math.random().toString(36).substr(2, 9);
+    }
+
+    document.getElementById('lostLoveForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
       const clickedButton = e.submitter; // O botão que foi clicado
 clickedButton.disabled = true;     // Desativar o botão
 clickedButton.innerText = "Processando..."; // Alterar o texto para informar o usuário

@@ -256,9 +256,13 @@ document.getElementById('paymentSection').style.display = 'block';
 
 
 <script>
-    document.getElementById("loveForm").addEventListener("submit", async function(event) {
-      event.preventDefault();
-      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+    function generateUniqueId() {
+        return 'id-' + Math.random().toString(36).substr(2, 9);
+      }
+  
+      document.getElementById('loveForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
   clickedButton.disabled = true;     // غیرفعال کردن دکمه
   clickedButton.innerText = "Processing..."; // تغییر متن برای اطلاع کاربر
   

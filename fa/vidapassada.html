@@ -259,13 +259,19 @@ document.getElementById('continueBtn').addEventListener('click', async function(
 
 
   <script>
-    document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {
+    
+    function generateUniqueId() {
+      return 'id-' + Math.random().toString(36).substr(2, 9);
+    }
+    document.getElementById('pastLifeForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-     const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  
+      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
   clickedButton.disabled = true;     // غیرفعال کردن دکمه
   clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
   
-     
+  
+
       let webhookUrl = "";
   
       if (clickedButton.id === "btnPastLifeDefault") {

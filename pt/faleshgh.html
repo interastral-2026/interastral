@@ -252,12 +252,17 @@
 </script>
 
   <script>
-    document.getElementById("loveForm").addEventListener("submit", async function(event) {
-      event.preventDefault();
-      const clickedButton = e.submitter; // O botão que foi clicado
-clickedButton.disabled = true;     // Desativar o botão
-clickedButton.innerText = "Processando..."; // Alterar o texto para informar o usuário
-
+      function generateUniqueId() {
+      return 'id-' + Math.random().toString(36).substr(2, 9);
+    }
+    document.getElementById('loveForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+  
+      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+  clickedButton.disabled = true;     // غیرفعال کردن دکمه
+  clickedButton.innerText = "Processando..."; // تغییر متن برای اطلاع کاربر
+  
+    
       const formData = {};
       const inputs = this.querySelectorAll("input, select, textarea");
       inputs.forEach(input => {
@@ -276,7 +281,8 @@ clickedButton.innerText = "Processando..."; // Alterar o texto para informar o u
           body: JSON.stringify(formData),
           headers: { "Content-Type": "application/json" }
         });
-
+// تولید Submission ID
+      const submissionId = 'SUB-' + Date.now() + '-' + Math.floor(Math.random() * 100000);
         const data = await response.json();
 
         if (data.payment_url) {

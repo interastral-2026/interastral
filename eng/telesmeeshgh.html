@@ -310,7 +310,7 @@ el.focus();
   
   
   <script>
-    document.getElementById("lostLoveForm").addEventListener("submit", async function(event) {
+    document.getElementById("lostLoveForm").addEventListener("submit", async function(e) {
       event.preventDefault();
       const clickedButton = e.submitter; // the button that was clicked
 clickedButton.disabled = true;     // disable the button

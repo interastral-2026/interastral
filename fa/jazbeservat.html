@@ -294,18 +294,20 @@ document.getElementById('continueBtn').addEventListener('click', async function(
     </script>
    
   <script>
-    function generateUniqueId() {
-      return 'SUB-' + Date.now() + '-' + Math.floor(Math.random() * 100000);
-    }
+   
   
-    document.getElementById("talismForm").addEventListener("submit", async function(event) {
-  event.preventDefault();
-  const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
+    function generateUniqueId() {
+      return 'id-' + Math.random().toString(36).substr(2, 9);
+    }
+    document.getElementById('talismForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+  
+      const clickedButton = e.submitter; // دکمه‌ای که کلیک شده
   clickedButton.disabled = true;     // غیرفعال کردن دکمه
   clickedButton.innerText = "در حال پردازش..."; // تغییر متن برای اطلاع کاربر
   
   
-  
+
   if (!clickedButton) {
     alert("لطفاً یکی از دکمه‌های پرداخت را انتخاب کنید.");
     return;
