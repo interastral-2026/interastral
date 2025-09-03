@@ -187,10 +187,70 @@
 
     <label>Seu e-mail para receber a leitura:</label>
     <input type="email" name="email" required>
+    <input type="hidden" name="form_name" value="loveForm pt " />
+    <button type="button" id="continueBtn">Continuar</button>
 
-    <button type="submit">Receber leitura mágica 💖</button>
+
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>Os segredos do seu amor estão à sua espera! 💌🔮</h2>
+      <p>
+        No fundo do seu coração, mensagens ocultas aguardam para serem descobertas.<br>
+        Com um olhar atento, você poderá compreender os segredos do seu relacionamento e do seu caminho amoroso, e viver uma experiência mágica.
+        Está pronto?
+      </p>
+      <button type="submit" id="btnLoveDefault">Pagamento em euros (8,99€)</button>
+     
+    </div>
+
+    
   </form>
 </div>
+
+
+<script>
+  document.getElementById('continueBtn').addEventListener('click', async function() {
+    const form = document.getElementById('loveForm');
+    const elements = [...form.querySelectorAll('input, select, textarea')];
+  
+    for (let el of elements) {
+      if (el.type === "hidden") continue; // Ignorar campos hidden
+  
+      // Verificar se os campos obrigatórios estão preenchidos
+      if (el.value.trim() === "") {
+        let label = el.name;
+        const labelEl = form.querySelector(`label[for='${el.id}']`);
+        if (labelEl) label = labelEl.innerText;
+        alert(`Por favor, preencha o campo "${label}".`);
+        el.focus();
+        return;
+      }
+    }
+  
+    // Coletar dados do formulário
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value });
+    
+    // Enviar para o Webhook (para salvar no Google Sheet)
+    try {
+      await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('Erro na comunicação com o servidor.', error);
+    }
+  
+    // Ocultar todos os campos do formulário
+    const formElements = document.querySelectorAll('#loveForm > label, #loveForm > input, #loveForm > select, #loveForm> textarea, #continueBtn');
+    formElements.forEach(el => el.style.display = 'none');
+  
+    // Mostrar seção de pagamento
+    document.getElementById('paymentSection').style.display = 'block';
+  });
+</script>
+
   <script>
     document.getElementById("loveForm").addEventListener("submit", async function(event) {
       event.preventDefault();

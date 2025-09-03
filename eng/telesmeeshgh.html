@@ -236,12 +236,78 @@
   
       <label>📧 Your email to receive the message:</label>
       <input type="email" name="email" required>
-      <label for="promo">🎁 Promo Code (if you have one):</label>
-      <input type="text" id="promo" name="promo" placeholder="e.g. VIP_1234">
+      
+      <input type="hidden" name="form_name" value=" lostLoveForm eng" />
+
+
+      <button type="button" id="continueBtn">ادامه</button>
   
-      <button type="submit">Receive Heart’s Revelation 💖</button>
-    </form>
-  </div>
+  
+    <!-- بخش نهایی (در ابتدا مخفی) -->
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>Your magical answer is ready! ✨</h2>
+      <p>
+        We have received important signs about your path.<br>
+        Complete the payment to receive these secrets and begin your journey.
+      </p>
+      <button type="submit" id="btnLostLoveDefault">Pay in Euros (€9.99)</button>
+     
+</div>
+
+  </form>
+  
+  
+ 
+<script>
+
+  document.getElementById('continueBtn').addEventListener('click', async function() {
+    const form = document.getElementById('lostLoveForm');
+    const elements = [...form.querySelectorAll('input, select, textarea')];
+  
+    for (let el of elements) {
+      if (el.type === "hidden") continue; // فیلدهای hidden نادیده گرفته شوند
+  
+      // بررسی اگر فیلد الزامی باشد یا می‌خواهید همه فیلدها را چک کنید
+      if (el.value.trim() === "") {
+        let label = el.name;
+        const labelEl = form.querySelector(`label[for='${el.id}']`);
+        if (labelEl) label = labelEl.innerText;
+        alert(`Please complete the "${label}" field.`);
+el.focus();
+
+        return; // جلوگیری از ادامه
+      }
+    }
+  
+    // جمع‌آوری داده‌های فرم
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value });
+    
+    
+      // ارسال به Webhook (برای ذخیره در Google Sheet)
+      try {
+        await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Error sending to the webhook:', error);
+
+      }
+    
+    
+    
+      // مخفی کردن همه فیلدهای فرم
+      const formElements = document.querySelectorAll('#lostLoveForm > label, #lostLoveForm > input, #lostLoveForm > select, #lostLoveForm > textarea, #continueBtn');
+      formElements.forEach(el => el.style.display = 'none');
+    
+      // نمایش بخش پرداخت
+      document.getElementById('paymentSection').style.display = 'block';
+    });
+    </script>
+  
   
   <script>
     document.getElementById("lostLoveForm").addEventListener("submit", async function(event) {

@@ -156,104 +156,126 @@
     </header>
     
     <h1>Mystical Tarot Reading 🔮</h1>
-    <div id="formContainer">
-      <form id="talismForm">
-        
-        <label>Full name:</label>
-        <input type="text" name="nome" required>
     
-        <label>Date of birth:</label>
-        <input type="date" name="data_nascimento" required>
+    <form id="tarotForm">
+      <label for="first_name">What is your name?</label>
+      <input type="text" id="first_name" name="first_name" required />
     
-        <label>Time of birth (if known):</label>
-        <input type="text" name="hora_nascimento">
+      <label for="focus">Which aspect of your life do you want this reading to focus on?</label>
+      <select id="focus" name="focus" required>
+        <option value="">Select...</option>
+        <option value="Love">Love</option>
+        <option value="Career">Career</option>
+        <option value="Health">Health</option>
+        <option value="Spirituality">Spirituality</option>
+      </select>
     
-        <label>City and country of birth:</label>
-        <input type="text" name="local_nascimento">
+      <label for="situation">Briefly describe your situation or specific question:</label>
+      <textarea id="situation" name="situation" rows="3"></textarea>
     
-        <label>Gender:</label>
-        <select name="genero">
-          <option value="Feminino">Female</option>
-          <option value="Masculino">Male</option>
-          <option value="Outro">Other</option>
-        </select>
-    
-        <label>Your current occupation or professional path:</label>
-        <input type="text" name="profissao">
-    
-        <label>How have you been feeling lately?</label>
-        <textarea name="sentimentos"></textarea>
-    
-        <label>What is your biggest financial desire at the moment?</label>
-        <textarea name="desejo_financeiro"></textarea>
-    
-        <label>What do you feel is blocking the flow of your prosperity?</label>
-        <textarea name="bloqueio"></textarea>
-    
-        <label>What type of energy or blessing would you like to attract into your life?</label>
-        <textarea name="energia_desejada"></textarea>
-    
-        <label>📧 Your email to receive your magical abundance symbol:</label>
-        <input type="email" name="email" required>
-    
-        <input type="hidden" name="form_name" value="talismForm eng" />
-    
-        <button type="button" id="continueBtn">Continue</button>
-    
-        <!-- Payment Section (Initially Hidden) -->
-        <div id="paymentSection" style="display: none; margin-top: 20px;">
-          <h2>The Hidden Secrets of Your Cup Are About to Be Revealed! 🔮</h2>
-          <p>
-            Your cup is full of mysterious signs and symbols.<br>
-            With a careful glance, you can uncover the secrets of your path and experience a magical and exciting journey.
-            You are just one small step away from discovering the magical messages and hidden mysteries… Are you ready?
-          </p>
-          <button type="button" id="btnDefault">Pay in Euros (8.99€)</button>
-        </div>
-    
-      </form>
-    </div>
-    
-    <script>
-    document.getElementById('continueBtn').addEventListener('click', async function() {
-      const form = document.getElementById('talismForm');
-      const requiredFields = form.querySelectorAll('[required]');
+      <label for="birth_date">Date of birth:</label>
+      <input type="date" id="birth_date" name="birth_date" required />
       
-      for (let field of requiredFields) {
-        if (!field.value.trim()) {
-          alert('Please fill in all required fields.');
-          return;
-        }
+      <label for="birth_place">Place of birth:</label>
+      <input type="text" id="birth_place" name="birth_place" required />
+      
+      <label for="birth_time">Time of birth (optional):</label>
+      <input type="time" id="birth_time" name="birth_time" />
+      
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender" required>
+        <option value="">Select...</option>
+        <option value="Female">Female</option>
+        <option value="Male">Male</option>
+        <option value="Other">Other</option>
+      </select>
+      
+      <label for="occupation">Occupation:</label>
+      <input type="text" id="occupation" name="occupation" required />
+      
+      <label for="feeling">How are you feeling right now?</label>
+      <select id="feeling" name="feeling" required>
+        <option value="">Select...</option>
+        <option value="Confused">Confused</option>
+        <option value="Hopeful">Hopeful</option>
+        <option value="Anxious">Anxious</option>
+        <option value="Grateful">Grateful</option>
+      </select>
+    
+      <label for="email">Your email to receive the reading:</label>
+      <input type="email" id="email" name="email" required />
+      
+    
+      <input type="hidden" name="form_name" value=" tarotForm" />
+
+
+      <button type="button" id="continueBtn">ادامه</button>
+  
+  
+    <!-- بخش نهایی (در ابتدا مخفی) -->
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>Your magical answer is ready! ✨</h2>
+  <p>
+    We have received important signs about your path.<br>
+  The magical symbols and signs of your journey are ready to be revealed, and you are just one small step away from uncovering them… Are you ready?
+  </p>
+      <button type="submit" id="btnTarotDefault">Pay in Euros (€4.99)</button>
+     
+  </div>
+  
+  </form>
+  
+  
+ 
+<script>
+
+  document.getElementById('continueBtn').addEventListener('click', async function() {
+    const form = document.getElementById('tarotForm');
+    const elements = [...form.querySelectorAll('input, select, textarea')];
+  
+    for (let el of elements) {
+      if (el.type === "hidden") continue; // فیلدهای hidden نادیده گرفته شوند
+  
+      // بررسی اگر فیلد الزامی باشد یا می‌خواهید همه فیلدها را چک کنید
+      if (el.value.trim() === "") {
+        let label = el.name;
+        const labelEl = form.querySelector(`label[for='${el.id}']`);
+        if (labelEl) label = labelEl.innerText;
+        alert(`Please complete the "${label}" field.`);
+el.focus();
+
+        return; // جلوگیری از ادامه
       }
+    }
+  
+    // جمع‌آوری داده‌های فرم
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value });
     
-      const formData = {};
-      form.querySelectorAll('input, select, textarea').forEach(input => {
-        if (input.name) formData[input.name] = input.value;
-      });
     
+      // ارسال به Webhook (برای ذخیره در Google Sheet)
       try {
         await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData)
+          body: JSON.stringify(data)
         });
-    
-        // Hide form fields
-        form.querySelectorAll('label, input, select, textarea, #continueBtn').forEach(el => el.style.display = 'none');
-        // Show payment section
-        document.getElementById('paymentSection').style.display = 'block';
-    
       } catch (error) {
-        alert('Error sending data. Please try again.');
-        console.error(error);
+        console.error('Error sending to the webhook:', error);
+
       }
-    });
     
-    document.getElementById('btnDefault').addEventListener('click', function() {
-      window.open('https://your-payment-link.com', '_blank');
+    
+    
+      // مخفی کردن همه فیلدهای فرم
+      const formElements = document.querySelectorAll('#tarotForm > label, #tarotForm > input, #tarotForm > select, #tarotForm > textarea, #continueBtn');
+      formElements.forEach(el => el.style.display = 'none');
+    
+      // نمایش بخش پرداخت
+      document.getElementById('paymentSection').style.display = 'block';
     });
     </script>
-    
   
     <script>
       function generateUniqueId() {
@@ -262,9 +284,23 @@
     
       document.getElementById('tarotForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-        const pathSegments = window.location.pathname.split('/');
-        const lang = pathSegments[1] || 'pt';  // 'pt' پیش‌فرض اگر چیزی نباشه
+    
+        const clickedButton = e.submitter; // دکمه‌ای که زده شد
+        let webhookUrl = "";
+    
+        if (clickedButton.id === "btnTarotDefault") {
+          webhookUrl = "https://hook.eu2.make.com/mtaocgp9oyh8ihm1k55a4yy5h600rk9l";
+        } else if (clickedButton.id === "btnTarotOther") {
+          webhookUrl = "https://hook.eu2.make.com/x048z9xou1q1dpxgl7yamv1rtsx6z15x";
+        } else {
+          alert("دکمه نامعتبر!");
+          return;
+        }
+    
         const submission_id = generateUniqueId();
+        const pathSegments = window.location.pathname.split('/');
+        const lang = pathSegments[1] || 'pt';
+    
         const formData = {
           submission_id,
           first_name: document.getElementById('first_name').value,
@@ -278,13 +314,12 @@
           gender: document.getElementById('gender').value,
           occupation: document.getElementById('occupation').value,
           lang: lang,
-          promo: document.getElementById('promo').value,
         };
     
         const paymentTab = window.open('', '_blank');
     
         try {
-          const response = await fetch("https://hook.eu2.make.com/mtaocgp9oyh8ihm1k55a4yy5h600rk9l", {
+          const response = await fetch(webhookUrl, {
             method: "POST",
             body: JSON.stringify(formData),
             headers: { "Content-Type": "application/json" }
@@ -293,15 +328,16 @@
           const data = await response.json();
     
           if (data.payment_url) {
-            paymentTab.location.href = data.payment_url;
-          } else {
-            paymentTab.close();
-            alert("Error starting payment. Please try again.");
-          }
-        } catch (error) {
-          paymentTab.close();
-          alert("Communication error with the server.");
-          console.error(error);
+  paymentTab.location.href = data.payment_url;
+} else {
+  paymentTab.close();
+  alert("Error starting payment. Please try again.");
+}
+} catch (error) {
+  paymentTab.close();
+  alert("Server communication error.");
+  console.error(error);
+
         }
       });
     </script>

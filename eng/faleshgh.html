@@ -198,15 +198,14 @@
 </div>
 <!-- بخش نهایی (در ابتدا مخفی) -->
 <div id="paymentSection" style="display: none; margin-top: 20px;">
-<h2>The Hidden Secrets of Your Cup Are About to Be Revealed! 🔮</h2>
-<p>
-  Your cup is full of mysterious signs and symbols.<br>
-With a careful glance, you can uncover the secrets of your path and experience a magical and exciting journey.
-You are just one small step away from discovering the magical messages and hidden mysteries… Are you ready?
-</p>
-
-<button type="submit" id="btnDefault">Pay in Euros (8.99€)</button>
-
+  <h2>Your Love Secrets Await! 💌🔮</h2>
+  <p>
+    Deep within your heart, there are hidden messages waiting to be discovered.<br>
+    With a careful look, you can uncover the secrets of your relationship and your path to love, and have a magical experience.
+    Are you ready?
+  </p>
+  <button type="submit" id="btnLoveDefault">Pay in Euros (€8.99)</button>
+ 
 </div>
 </form>
 
@@ -225,7 +224,7 @@ document.getElementById('continueBtn').addEventListener('click', async function(
   });
 
   if (!allFilled) {
-      alert('لطفاً تمام فیلدها را پر کنید.');
+    alert('Please fill in all fields.');
       return;
   }
 
@@ -250,7 +249,7 @@ document.getElementById('paymentSection').style.display = 'block';
       document.getElementById('paymentSection').style.display = 'block';
   } catch (error) {
       console.error('Error sending to webhook:', error);
-      alert('خطا در ارسال اطلاعات. لطفاً دوباره تلاش کنید.');
+      alert('Error sending to webhook');
   }
 });
 </script>

@@ -235,16 +235,15 @@
 
 <!-- بخش نهایی (در ابتدا مخفی) -->
 <div id="paymentSection" style="display: none; margin-top: 20px;">
-<h2>The Hidden Secrets of Your Cup Are About to Be Revealed! 🔮</h2>
+  <h2>Your Abundance Symbols Are Ready! ✨💰</h2>
 <p>
-  Your cup is full of mysterious signs and symbols.<br>
-With a careful glance, you can uncover the secrets of your path and experience a magical and exciting journey.
-You are just one small step away from discovering the magical messages and hidden mysteries… Are you ready?
+We have received the keys to your path.<br>
+Your cup is filled with hidden secrets and opportunities, and you are just one small step away from unlocking the magical messages of wealth attraction… Are you ready to begin your mystical journey?
 </p>
-
-<button type="submit" id="btnDefault">Pay in Euros (8.99€)</button>
-
+  <button type="submit" id="btnTalismDefault">Pay in Euros (€5.99)</button>
+  
 </div>
+
     </form>
   
 
@@ -263,8 +262,9 @@ You are just one small step away from discovering the magical messages and hidde
             let label = el.name;
             const labelEl = form.querySelector(`label[for='${el.id}']`);
             if (labelEl) label = labelEl.innerText;
-            alert(`لطفاً فیلد "${label}" را تکمیل کنید.`);
-            el.focus();
+            alert(`Please complete the "${label}" field.`);
+el.focus();
+
             return; // جلوگیری از ادامه
           }
         }
@@ -284,7 +284,8 @@ You are just one small step away from discovering the magical messages and hidde
                 body: JSON.stringify(data)
               });
             } catch (error) {
-              console.error('خطا در ارسال به وب‌هوک:', error);
+              console.error('Error sending to the webhook:', error);
+
             }
           
           

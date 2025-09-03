@@ -179,16 +179,76 @@
       <label for="symbol">Um símbolo que te representa</label>
       <input type="text" id="symbol" name="symbol" placeholder="Ex: Lua, estrela, pássaro" required>
 
-      <label for="photo">Envie uma selfie (opcional)</label>
+      <label for="photo">Envie uma selfie (opcional)</label> 
       <input type="file" id="photo" name="photo" accept="image/*">
 
       <label for="email">Seu e-mail para receber secret de InterAstral✨</label>
       <input type="email" id="email" name="email" placeholder="exemplo@magia.com" required>
+      <input type="hidden" name="form_name" value="pastLifeForm pt " />
+      <button type="button" id="continueBtn">Continuar</button>
 
 
-      <button type="submit">Descobrir minha vida passada 🔮</button>
+
+      <div id="paymentSection" style="display: none; margin-top: 20px;">
+        <h2>Os segredos da sua vida passada estão prontos! ✨🔮</h2>
+        <p>
+          Os mistérios ocultos da sua vida anterior foram revelados.<br>
+          Está a apenas um pequeno passo de descobrir completamente esses segredos… Está pronto para começar sua viagem mágica ao passado?
+        </p>
+      
+        <button type="submit" id="btnPastLifeDefault">Pagamento em euros (10,99€)</button>
+        
+      </div>
+      
     </form>
   </div>
+
+
+
+<script>
+  document.getElementById('continueBtn').addEventListener('click', async function() {
+    const form = document.getElementById('pastLifeForm');
+    const elements = [...form.querySelectorAll('input, select, textarea')];
+  
+    for (let el of elements) {
+      if (el.type === "hidden") continue; // Ignorar campos hidden
+  
+      // Verificar se os campos obrigatórios estão preenchidos
+      if (el.value.trim() === "") {
+        let label = el.name;
+        const labelEl = form.querySelector(`label[for='${el.id}']`);
+        if (labelEl) label = labelEl.innerText;
+        alert(`Por favor, preencha o campo "${label}".`);
+        el.focus();
+        return;
+      }
+    }
+  
+    // Coletar dados do formulário
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value });
+    
+    // Enviar para o Webhook (para salvar no Google Sheet)
+    try {
+      await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('Erro na comunicação com o servidor.', error);
+    }
+  
+    // Ocultar todos os campos do formulário
+    const formElements = document.querySelectorAll('#pastLifeForm > label, #pastLifeForm > input, #pastLifeForm > select, #pastLifeForm> textarea, #continueBtn');
+    formElements.forEach(el => el.style.display = 'none');
+  
+    // Mostrar seção de pagamento
+    document.getElementById('paymentSection').style.display = 'block';
+  });
+</script>
+
 
   <script>
     document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {

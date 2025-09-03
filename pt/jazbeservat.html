@@ -225,9 +225,69 @@
 
     <label>📧 Seu e-mail para receber seu símbolo mágico de abundância:</label>
     <input type="email" name="email" required>
+    <input type="hidden" name="form_name" value="talismForm pt " />
+    <button type="button" id="continueBtn">Continuar</button>
 
-    <button type="submit">🔓 Despertar minha Energia de Abundância 💰</button>
+
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>Seus símbolos de abundância estão prontos! ✨💰</h2>
+      <p>
+        Recebemos as chaves do seu caminho.<br>
+        Sua xícara está cheia de segredos e oportunidades ocultas, e você está a apenas um pequeno passo de descobrir as mensagens mágicas para atrair prosperidade… Pronto para começar sua jornada mágica?
+      </p>
+      <button type="submit" id="btnTalismDefault">Pagamento em euros (5,99€)</button>
+    
+    </div>
+    
   </form>
+
+
+
+<script>
+  document.getElementById('continueBtn').addEventListener('click', async function() {
+    const form = document.getElementById('talismForm');
+    const elements = [...form.querySelectorAll('input, select, textarea')];
+  
+    for (let el of elements) {
+      if (el.type === "hidden") continue; // Ignorar campos hidden
+  
+      // Verificar se os campos obrigatórios estão preenchidos
+      if (el.value.trim() === "") {
+        let label = el.name;
+        const labelEl = form.querySelector(`label[for='${el.id}']`);
+        if (labelEl) label = labelEl.innerText;
+        alert(`Por favor, preencha o campo "${label}".`);
+        el.focus();
+        return;
+      }
+    }
+  
+    // Coletar dados do formulário
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value });
+    
+    // Enviar para o Webhook (para salvar no Google Sheet)
+    try {
+      await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('Erro na comunicação com o servidor.', error);
+    }
+  
+    // Ocultar todos os campos do formulário
+    const formElements = document.querySelectorAll('#talismForm > label, #talismForm > input, #talismForm > select, #talismForm> textarea, #continueBtn');
+    formElements.forEach(el => el.style.display = 'none');
+  
+    // Mostrar seção de pagamento
+    document.getElementById('paymentSection').style.display = 'block';
+  });
+</script>
+
+
 
   <script>
     document.getElementById("talismForm").addEventListener("submit", async function(event) {

@@ -241,9 +241,71 @@
 
     <label for="email">Por favor, insira seu e-mail para receber a leitura:</label>
     <input type="email" id="email" name="email" required />
+    <input type="hidden" name="form_name" value="cafeForm pt " />
 
-    <button type="submit">Enviar e Receber Leitura</button>
+    <button type="button" id="continueBtn">Continuar</button>
+
+    <!-- Seção final (inicialmente oculta) -->
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>Os segredos ocultos da sua xícara serão revelados! 🔮</h2>
+      <p>
+        Sua xícara está cheia de sinais e símbolos misteriosos.<br>
+        Com um olhar atento, você poderá descobrir os segredos do seu caminho e viver uma experiência mágica e emocionante.
+        Falta apenas um pequeno passo para descobrir as mensagens mágicas e os mistérios ocultos… Você está pronto?
+      </p>
+    
+      <button type="submit" id="btnDefault">Pagamento em euros (4,99€)</button>
+     
+    </div>
+    
   </form>
+
+
+  <script>
+    document.getElementById('continueBtn').addEventListener('click', async function() {
+      const form = document.getElementById('cafeForm');
+      const elements = [...form.querySelectorAll('input, select, textarea')];
+    
+      for (let el of elements) {
+        if (el.type === "hidden") continue; // Ignorar campos hidden
+    
+        // Verificar se os campos obrigatórios estão preenchidos
+        if (el.value.trim() === "") {
+          let label = el.name;
+          const labelEl = form.querySelector(`label[for='${el.id}']`);
+          if (labelEl) label = labelEl.innerText;
+          alert(`Por favor, preencha o campo "${label}".`);
+          el.focus();
+          return;
+        }
+      }
+    
+      // Coletar dados do formulário
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((value, key) => { data[key] = value });
+      
+      // Enviar para o Webhook (para salvar no Google Sheet)
+      try {
+        await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Erro na comunicação com o servidor.', error);
+      }
+    
+      // Ocultar todos os campos do formulário
+      const formElements = document.querySelectorAll('#cafeForm > label, #cafeForm > input, #cafeForm > select, #cafeForm > textarea, #continueBtn');
+      formElements.forEach(el => el.style.display = 'none');
+    
+      // Mostrar seção de pagamento
+      document.getElementById('paymentSection').style.display = 'block';
+    });
+  </script>
+
+
 
   <script>
     function generateUniqueId() {

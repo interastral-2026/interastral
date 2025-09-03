@@ -205,10 +205,74 @@
     
       <label for="email">Votre email pour recevoir la lecture :</label>
       <input type="email" id="email" name="email" required />
-    
-      <button type="submit">✨ Révélez ma lecture</button>
+      <input type="hidden" name="form_name" value="tarotForm fr " />
+      <button type="button" id="continueBtn">Continuer</button>
+  
+      <div id="paymentSection" style="display: none; margin-top: 20px;">
+        <h2>Votre réponse magique est prête ! ✨</h2>
+        <p>
+          Nous avons reçu les signes importants de votre chemin.<br>
+          Les symboles et indices magiques de votre parcours sont prêts à être découverts, et vous n’êtes qu’à un petit pas pour révéler leurs secrets… Êtes-vous prêt ?
+        </p>
+        <button type="submit" id="btnTarotDefault">Paiement en euros (4,99€)</button>
+        
+      </div>
+      
     </form>
     
+
+
+<script>
+
+
+  document.getElementById('continueBtn').addEventListener('click', async function() {
+    const form = document.getElementById('tarotForm');
+    const elements = [...form.querySelectorAll('input, select, textarea')];
+  
+    for (let el of elements) {
+      if (el.type === "hidden") continue; // فیلدهای hidden نادیده گرفته شوند
+  
+      // بررسی اگر فیلد الزامی باشد یا می‌خواهید همه فیلدها را چک کنید
+      if (el.value.trim() === "") {
+  let label = el.name;
+  const labelEl = form.querySelector(`label[for='${el.id}']`);
+  if (labelEl) label = labelEl.innerText;
+  alert(`Veuillez remplir le champ "${label}".`);
+  el.focus();
+  return;
+
+      }
+    }
+  
+    // جمع‌آوری داده‌های فرم
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value });
+    
+    // ارسال به Webhook (برای ذخیره در Google Sheet)
+    try {
+      await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('Erreur de communication avec le serveur.', error);
+    }
+  
+  
+  
+    // مخفی کردن همه فیلدهای فرم
+    const formElements = document.querySelectorAll('#tarotForm > label, #tarotForm > input, #tarotForm > select, #tarotForm > textarea, #continueBtn');
+    formElements.forEach(el => el.style.display = 'none');
+  
+    // نمایش بخش پرداخت
+    document.getElementById('paymentSection').style.display = 'block';
+  });
+  </script>
+
+
+
     <script>
       function generateUniqueId() {
         return 'id-' + Math.random().toString(36).substr(2, 9);

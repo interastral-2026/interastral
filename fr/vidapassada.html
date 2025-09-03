@@ -182,11 +182,78 @@
   
         <label for="email">Votre email pour recevoir votre secret Inter Astral ✨</label>
         <input type="email" id="email" name="email" placeholder="exemple@magie.com" required>
-  
-        <button type="submit">Découvrez ma vie antérieure 🔮</button>
+
+
+    <input type="hidden" name="form_name" value="pastLifeForm fr " />
+    <button type="button" id="continueBtn">Continuer</button>
+
+    <div id="paymentSection" style="display: none; margin-top: 20px;">
+      <h2>Les secrets de votre vie passée sont prêts ! ✨🔮</h2>
+      <p>
+        Les mystères cachés de votre vie antérieure ont été révélés.<br>
+        Il ne vous reste qu’un petit pas pour découvrir entièrement ces secrets… Êtes-vous prêt à commencer votre voyage magique dans le passé ?
+      </p>
+    
+      <button type="submit" id="btnPastLifeDefault">Paiement en euros (10,99€)</button>
+     
+    </div>
+    
       </form>
     </div>
   
+
+
+<script>
+
+
+  document.getElementById('continueBtn').addEventListener('click', async function() {
+    const form = document.getElementById('pastLifeForm');
+    const elements = [...form.querySelectorAll('input, select, textarea')];
+  
+    for (let el of elements) {
+      if (el.type === "hidden") continue; // فیلدهای hidden نادیده گرفته شوند
+  
+      // بررسی اگر فیلد الزامی باشد یا می‌خواهید همه فیلدها را چک کنید
+      if (el.value.trim() === "") {
+  let label = el.name;
+  const labelEl = form.querySelector(`label[for='${el.id}']`);
+  if (labelEl) label = labelEl.innerText;
+  alert(`Veuillez remplir le champ "${label}".`);
+  el.focus();
+  return;
+
+      }
+    }
+  
+    // جمع‌آوری داده‌های فرم
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value });
+    
+    // ارسال به Webhook (برای ذخیره در Google Sheet)
+    try {
+      await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('Erreur de communication avec le serveur.', error);
+    }
+  
+  
+  
+    // مخفی کردن همه فیلدهای فرم
+    const formElements = document.querySelectorAll('#pastLifeForm > label, #pastLifeForm > input, #pastLifeForm > select, #pastLifeForm > textarea, #continueBtn');
+    formElements.forEach(el => el.style.display = 'none');
+  
+    // نمایش بخش پرداخت
+    document.getElementById('paymentSection').style.display = 'block';
+  });
+  </script>
+
+
+
     <script>
       document.getElementById("pastLifeForm").addEventListener("submit", async function (e) {
         e.preventDefault();

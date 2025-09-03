@@ -240,9 +240,72 @@
   
       <label for="email">Veuillez saisir votre e-mail pour recevoir la lecture :</label>
       <input type="email" id="email" name="email" required />
-  
-      <button type="submit">Envoyer et recevoir la lecture</button>
+      <input type="hidden" name="form_name" value="cafeForm fr " />
+      <button type="button" id="continueBtn">Continuer</button>
+
+      <!-- Section finale (initialement cachée) -->
+      <div id="paymentSection" style="display: none; margin-top: 20px;">
+        <h2>Les secrets cachés de votre tasse vont se révéler ! 🔮</h2>
+        <p>
+          Votre tasse est remplie de signes et de symboles mystérieux.<br>
+          Avec un regard attentif, vous pourrez découvrir les secrets de votre chemin et vivre une expérience magique et excitante.
+          Il ne vous reste qu’un petit pas pour découvrir les messages magiques et les mystères cachés… Êtes-vous prêt ?
+        </p>
+      
+        <button type="submit" id="btnDefault">Paiement en euros (4,99€)</button>
+       
+      </div>
+      
     </form>
+
+<script>
+
+
+  document.getElementById('continueBtn').addEventListener('click', async function() {
+    const form = document.getElementById('cafeForm');
+    const elements = [...form.querySelectorAll('input, select, textarea')];
+  
+    for (let el of elements) {
+      if (el.type === "hidden") continue; // فیلدهای hidden نادیده گرفته شوند
+  
+      // بررسی اگر فیلد الزامی باشد یا می‌خواهید همه فیلدها را چک کنید
+      if (el.value.trim() === "") {
+  let label = el.name;
+  const labelEl = form.querySelector(`label[for='${el.id}']`);
+  if (labelEl) label = labelEl.innerText;
+  alert(`Veuillez remplir le champ "${label}".`);
+  el.focus();
+  return;
+
+      }
+    }
+  
+    // جمع‌آوری داده‌های فرم
+    const formData = new FormData(form);
+    const data = {};
+    formData.forEach((value, key) => { data[key] = value });
+    
+    // ارسال به Webhook (برای ذخیره در Google Sheet)
+    try {
+      await fetch("https://hook.eu2.make.com/9jqasml9hkzcr1eysvqa3h45cruy1x2k", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+    } catch (error) {
+      console.error('Erreur de communication avec le serveur.', error);
+    }
+  
+  
+  
+    // مخفی کردن همه فیلدهای فرم
+    const formElements = document.querySelectorAll('#cafeForm > label, #cafeForm > input, #cafeForm > select, #cafeForm > textarea, #continueBtn');
+    formElements.forEach(el => el.style.display = 'none');
+  
+    // نمایش بخش پرداخت
+    document.getElementById('paymentSection').style.display = 'block';
+  });
+  </script>
   
     <script>
       function generateUniqueId() {
