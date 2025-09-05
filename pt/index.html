@@ -347,6 +347,13 @@
 <body>
  
  <div class="header">
+  <header>
+    <div id="user-info">
+      <!-- بعد از ورود، ایمیل یا اسم اینجا نمایش داده می‌شود -->
+    </div>
+    <button id="logout-btn" style="display:none;">خروج</button>
+  </header>
+  
     <!-- لوگو در مرکز -->
   <div class="center-logo">
     <img src="https://i.imgur.com/yQHwOY1.gif" alt="Logo" />
@@ -387,6 +394,26 @@
       }).join(''));
       return JSON.parse(jsonPayload);
   }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const userInfoDiv = document.getElementById('user-info');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if(user) {
+        // نمایش ایمیل یا اسم کاربر
+        userInfoDiv.textContent = `خوش آمدید، ${user.name || user.email}`;
+        logoutBtn.style.display = 'inline-block';
+    }
+
+    // دکمه خروج
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('user');
+        window.location.reload();
+    });
+});
+
   </script>
   
 
