@@ -1,0 +1,26 @@
+{
+  "name": "interastral1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/interastral-2026/interastral.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/interastral-2026/interastral/issues"
+  },
+  "homepage": "https://github.com/interastral-2026/interastral#readme",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "googleapis": "^159.0.0",
+    "node-fetch": "^3.3.2"
+  }
+}
