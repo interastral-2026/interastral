@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اشتراک‌ها</title>
+<style>
+body { font-family: sans-serif; background: #f0f0f5; }
+.container { display: flex; justify-content: center; gap: 20px; margin-top: 50px; }
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.card h3 { margin-bottom: 10px; }
+.card p { margin: 5px 0; }
+.card button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border: none;
+    background: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+</style>
+<script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<h1 style="text-align:center;">پلن‌های اشتراک</h1>
+<div class="container">
+    <div class="card">
+        <h3>میكرو</h3>
+        <p>۹$/ماه</p>
+        <p>امکانات پایه</p>
+        <button onclick="subscribe('price_1S3vygKQmYOw24yaisSQ979f')">خرید</button>
+    </div>
+    <div class="card">
+        <h3>اصلی</h3>
+        <p>۱۵$/ماه</p>
+        <p>امکانات متوسط</p>
+        <button onclick="subscribe('price_1S3w0cKQmYOw24yaXXsIltwI')">خرید</button>
+    </div>
+    <div class="card">
+        <h3>پریمیوم</h3>
+        <p>۲۵$/ماه</p>
+        <p>تمام امکانات</p>
+        <button onclick="subscribe('price_1S3w0qKQmYOw24yamVYtI5X9')">خرید</button>
+    </div>
+</div>
+
+<script>
+const stripe = Stripe('pk_live_51RU9PcKQmYOw24yaBk86iUHbIOygmytWeGfPDf2ahHtR8OF9T8hAwLyk9y7hYtXtf4P0qEwmUkWfltQv9AirMBbF00NxkiGC5z');
+
+function subscribe(priceId) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+        alert("لطفاً ابتدا با گوگل وارد شوید!");
+        window.location.href = 'index.html';
+        return;
+    }
+
+    fetch('https://hook.eu2.make.com/ubk2luntlnt1e75gs0r58ba346xtu958', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({priceId: priceId, userEmail: user.email})
+    })
+    .then(res => res.json())
+    .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+    .then(result => { if(result.error) alert(result.error.message); })
+    .catch(err => alert("خطا در اتصال به سرور: " + err));
+}
+</script>
+</body>
+</html>
