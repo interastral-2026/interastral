@@ -1,54 +1,60 @@
 const express = require('express');
-const { google } = require('googleapis');
 const bodyParser = require('body-parser');
+const admin = require('firebase-admin');
+
+const serviceAccount = require('./serviceAccountKey.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+
+const db = admin.firestore();
+
 const app = express();
 const port = 3000;
 
-const keys = require('./service-account.json'); // فایل JSON سرویس اکانت
+
 
 app.use(bodyParser.json());
 
-async function getAccessToken() {
-  const client = new google.auth.JWT(
-    keys.client_email,
-    null,
-    keys.private_key,
-    ['https://www.googleapis.com/auth/datastore', 'https://www.googleapis.com/auth/cloud-platform']
-  );
-  await client.authorize();
-  return client.credentials.access_token;
-}
-
+// دریافت داده از Stripe و ذخیره در Firestore
 app.post('/save-subscription', async (req, res) => {
-  const { email, plan, subscriptionId, status } = req.body;
-  const token = await getAccessToken();
-
-  // ارسال به Firestore
-  const fetch = require('node-fetch');
-  const url = `https://firestore.googleapis.com/v1/projects/${keys.project_id}/databases/(default)/documents/subscriptions`;
-  const body = {
-    fields: {
-      email: { stringValue: email },
-      plan: { stringValue: plan },
-      subscriptionId: { stringValue: subscriptionId },
-      status: { stringValue: status },
-      startDate: { stringValue: new Date().toISOString() }
+    try {
+      console.log('Incoming request body:', req.body); // ← این خط مهمه
+  
+      const { email, plan, subscriptionId, status } = req.body;
+  
+  
+      // ادامه کد شما برای ارسال به Firestore
+      const token = await getAccessToken();
+      const url = `https://firestore.googleapis.com/v1/projects/estelar-56583/databases/(default)/documents/subscriptions`;
+      const body = {
+        fields: {
+          email: { stringValue: email },
+          plan: { stringValue: plan },
+          subscriptionId: { stringValue: subscriptionId },
+          status: { stringValue: status },
+          startDate: { stringValue: new Date().toISOString() }
+        }
+      };
+  
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+  
+      const text = await response.text();
+      console.log('Firestore response:', text);
+  
+      res.status(response.status).send(text);
+  
+    } catch (error) {
+      console.error('Server error details:', error.stack || error);
+      res.status(500).json({ success: false, error: error.message, details: error.stack });
     }
-  };
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
   });
-
-  const data = await response.json();
-  res.json({ success: true, data });
-});
-
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
-});
+  

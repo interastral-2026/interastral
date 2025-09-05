@@ -20,7 +20,11 @@
   "dependencies": {
     "body-parser": "^2.2.0",
     "express": "^5.1.0",
+    "firebase": "^12.2.1",
+    "firebase-admin": "^13.5.0",
     "googleapis": "^159.0.0",
     "node-fetch": "^3.3.2"
   }
+ 
+  
 }
